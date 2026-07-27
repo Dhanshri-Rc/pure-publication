@@ -1,0 +1,35 @@
+rules_version = '2';
+
+service firebase.storage {
+  match /b/{bucket}/o {
+
+    function isAdmin() {
+      return request.auth != null &&
+        firestore.exists(/databases/(default)/documents/users/$(request.auth.uid)) &&
+        firestore.get(/databases/(default)/documents/users/$(request.auth.uid)).data.role == "admin";
+    }
+
+    // Journal cover images: public read, admin-only write
+    match /journal-covers/{fileName} {
+      allow read: if true;
+      allow write: if isAdmin() &&
+        request.resource.size < 5 * 1024 * 1024 &&
+        request.resource.contentType.matches('image/.*');
+    }
+
+    // Manuscript submissions: no public read (only via signed Cloud Function/admin),
+    // anyone can upload (create) but not overwrite or delete existing files.
+    match /submissions/{submissionId}/{fileName} {
+      allow create: if request.resource.size < 15 * 1024 * 1024 &&
+        request.resource.contentType.matches(
+          'application/pdf|application/msword|application/vnd.openxmlformats-officedocument.wordprocessingml.document'
+        );
+      allow read: if isAdmin();
+      allow update, delete: if isAdmin();
+    }
+
+    match /{allPaths=**} {
+      allow read, write: if false;
+    }
+  }
+}
