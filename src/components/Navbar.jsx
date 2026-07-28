@@ -4,6 +4,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X, Search, BookOpen } from "lucide-react";
 import { NAV_LINKS, SITE_NAME } from "../utils/constants";
 import Button from "./Button";
+import logo from "../assets/images/purelogo.webp";
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
@@ -28,18 +29,13 @@ export default function Navbar() {
       transition={{ duration: 0.6, ease: "easeOut" }}
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
         scrolled
-          ? "bg-navy-900/80 backdrop-blur-lg shadow-lg py-3"
+          ? "bg-[#214342] backdrop-blur-lg shadow-lg py-3"
           : "bg-transparent py-5"
       }`}
     >
       <nav className="container-custom flex items-center justify-between">
         <Link to="/" className="flex items-center gap-2 group">
-          <span className="flex items-center justify-center w-10 h-10 rounded-xl bg-amber-500 text-navy-900 group-hover:rotate-6 transition-transform duration-300">
-            <BookOpen size={20} />
-          </span>
-          <span className="text-white font-heading font-bold text-lg sm:text-xl tracking-tight">
-            {SITE_NAME}
-          </span>
+         <img src={logo} alt="Pure Publication Logo" className="w-28 h-10" />
         </Link>
 
         <ul className="hidden lg:flex items-center gap-8">
