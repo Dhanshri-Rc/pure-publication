@@ -16,8 +16,44 @@ import {
   Users,
 } from "lucide-react";
 
-import heroBackground from "../assets/hero-bg.png";
-
+import heroBackground from "../assets/images/home-bg.png";
+const INDEXING_PARTNERS = [
+  {
+    name: "Crossref",
+    image: "/images/indexing/crossref.png",
+    alt: "Crossref",
+  },
+  {
+    name: "DOI",
+    image: "/images/indexing/doi.png",
+    alt: "DOI",
+  },
+  {
+    name: "Google Scholar",
+    image: "/images/indexing/google-scholar.png",
+    alt: "Google Scholar",
+  },
+  {
+    name: "Open Access",
+    image: "/images/indexing/open-access.png",
+    alt: "Open Access",
+  },
+  {
+    name: "ORCID",
+    image: "/images/indexing/orcid.png",
+    alt: "ORCID",
+  },
+  {
+    name: "Scopus",
+    image: "/images/indexing/scopus.png",
+    alt: "Scopus",
+  },
+  {
+    name: "ISI",
+    image: "/images/indexing/isi.png",
+    alt: "International Scientific Indexing",
+  },
+];
 const BRAND = {
   dark: "#073F40",
   darker: "#053536",
@@ -327,80 +363,368 @@ function ServiceCard({ item, index }) {
 
   return (
     <motion.article
-      variants={fadeUp}
-      initial="hidden"
-      whileInView="show"
-      viewport={{ once: true, amount: 0.18 }}
-      transition={{ duration: 0.52, delay: index * 0.07 }}
-      whileHover={{ y: -8 }}
-      className="group flex min-h-[238px] flex-col rounded-[10px] border border-slate-200/90 bg-white p-5 shadow-[0_8px_30px_rgba(7,63,64,.055)] transition-shadow duration-300 hover:shadow-[0_18px_45px_rgba(7,63,64,.12)]"
-    >
-      <span className="flex h-11 w-11 items-center justify-center rounded-full bg-[#EEF1F0] text-[#073F40] transition-all duration-300 group-hover:rotate-3 group-hover:bg-[#073F40] group-hover:text-[#D4A257]">
-        <Icon size={20} strokeWidth={1.7} />
-      </span>
+      initial={{
+        opacity: 0,
+        y: 26,
+      }}
+      whileInView={{
+        opacity: 1,
+        y: 0,
+      }}
+      viewport={{
+        once: true,
+        amount: 0.18,
+      }}
+      transition={{
+        duration: 0.55,
+        delay: index * 0.08,
+        ease: [0.22, 1, 0.36, 1],
+      }}
+      whileHover={{
+        y: -8,
+      }}
+      className="
+        group
+        relative
+        flex
+        min-h-[270px]
+        flex-col
+        overflow-hidden
+        rounded-[9px]
+        border
+        border-[#E6E9E7]
+        bg-white
+        px-[18px]
+        pb-[18px]
+        pt-[16px]
+        shadow-[0_7px_24px_rgba(7,63,64,0.055)]
+        transition-all
+        duration-300
 
-      <h3 className="mt-5 font-serif text-[15px] font-semibold leading-5 text-[#153D3E]">
+        hover:border-[#C9D7D2]
+        hover:shadow-[0_18px_42px_rgba(7,63,64,0.12)]
+
+        sm:min-h-[282px]
+
+        lg:min-h-[278px]
+      "
+    >
+      {/* HOVER BACKGROUND */}
+      <span
+        aria-hidden="true"
+        className="
+          pointer-events-none
+          absolute inset-0
+          bg-[linear-gradient(145deg,rgba(7,63,64,0.025),transparent_60%)]
+          opacity-0
+          transition-opacity
+          duration-300
+          group-hover:opacity-100
+        "
+      />
+
+      {/* ICON */}
+      <motion.span
+        whileHover={{
+          rotate: index === 2 ? 7 : -6,
+          scale: 1.06,
+        }}
+        transition={{
+          duration: 0.25,
+        }}
+        className="
+          relative z-10
+          flex
+          h-[46px]
+          w-[46px]
+          shrink-0
+          items-center
+          justify-center
+          rounded-full
+          bg-[#EEF1F0]
+          text-[#0C3E3F]
+          transition-all
+          duration-300
+
+          group-hover:bg-[#073F40]
+          group-hover:text-[#D4A257]
+          group-hover:shadow-[0_8px_18px_rgba(7,63,64,0.16)]
+        "
+      >
+        <Icon
+          size={22}
+          strokeWidth={1.7}
+          className="transition-transform duration-300"
+        />
+      </motion.span>
+
+      {/* TITLE */}
+      <h3
+        className="
+          relative z-10
+          mt-[17px]
+          min-h-[42px]
+          font-sans
+          text-[13px]
+          font-semibold
+          leading-[1.35]
+          text-[#153D3E]
+
+          sm:text-[14px]
+        "
+      >
         {item.title}
       </h3>
 
-      <p className="mt-3 flex-1 text-[11px] leading-[1.75] text-slate-600">
+      {/* DESCRIPTION */}
+      <p
+        className="
+          relative z-10
+          mt-[10px]
+          flex-1
+          text-[10px]
+          leading-[1.85]
+          text-[#526060]
+
+          sm:text-[11px]
+        "
+      >
         {item.description}
       </p>
 
+      {/* LINK */}
       <Link
         to={item.to}
-        className="mt-4 inline-flex items-center gap-2 text-[11px] font-semibold text-[#073F40]"
+        className="
+          relative z-10
+          mt-[16px]
+          inline-flex
+          w-fit
+          items-center
+          gap-3
+          text-[10px]
+          font-semibold
+          text-[#123839]
+          transition-colors
+          duration-300
+
+          hover:text-[#D4A257]
+
+          sm:text-[11px]
+        "
       >
         Learn More
+
         <ArrowRight
-          size={13}
-          className="transition-transform duration-300 group-hover:translate-x-1.5"
+          size={14}
+          strokeWidth={1.8}
+          className="
+            transition-transform
+            duration-300
+            group-hover:translate-x-1.5
+          "
         />
       </Link>
+
+      {/* BOTTOM ACCENT */}
+      <span
+        aria-hidden="true"
+        className="
+          absolute
+          bottom-0
+          left-0
+          h-[3px]
+          w-0
+          bg-[#D4A257]
+          transition-all
+          duration-500
+          group-hover:w-full
+        "
+      />
     </motion.article>
   );
 }
 
-function JournalCard({ journal }) {
-  const [failed, setFailed] = useState(false);
+function JournalCard({ journal, index }) {
+  const [imageError, setImageError] = useState(false);
 
   return (
     <motion.article
-      layout
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      whileHover={{ y: -6 }}
-      className="group min-w-0"
+      initial={{
+        opacity: 0,
+        y: 22,
+      }}
+      animate={{
+        opacity: 1,
+        y: 0,
+      }}
+      transition={{
+        duration: 0.48,
+        delay: index * 0.07,
+        ease: [0.22, 1, 0.36, 1],
+      }}
+      whileHover={{
+        y: -6,
+      }}
+      className="
+        group
+        min-w-0
+      "
     >
-      <Link to={`/journals/${journal.id}`} className="block">
-        <div className="aspect-[.72/1] overflow-hidden rounded-[3px] bg-gradient-to-br from-[#0A4A4B] to-[#D4A257] shadow-[0_10px_25px_rgba(7,63,64,.12)]">
-          {!failed ? (
+      <Link
+        to={`/journals/${journal.id}`}
+        aria-label={`View ${journal.title}`}
+        className="block"
+      >
+        {/* JOURNAL COVER */}
+        <div
+          className="
+            relative
+            mx-auto
+            aspect-[0.72/1]
+            w-full
+            max-w-[150px]
+            overflow-hidden
+            rounded-[3px]
+            bg-[#F1F3F2]
+            shadow-[0_8px_22px_rgba(7,63,64,0.09)]
+            transition-all
+            duration-500
+
+            group-hover:shadow-[0_18px_36px_rgba(7,63,64,0.16)]
+
+            sm:max-w-[160px]
+
+            lg:max-w-[155px]
+
+            xl:max-w-[165px]
+          "
+        >
+          {!imageError && journal.coverImage ? (
             <img
-              src={journal.image}
+              src={journal.coverImage}
               alt={`${journal.title} journal cover`}
               loading="lazy"
-              onError={() => setFailed(true)}
-              className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.045]"
+              draggable={false}
+              onError={() => setImageError(true)}
+              className="
+                h-full
+                w-full
+                object-cover
+                transition-transform
+                duration-500
+                ease-out
+                group-hover:scale-[1.045]
+              "
             />
           ) : (
-            <div className="flex h-full flex-col justify-between p-5 text-white">
-              <span className="text-[10px] uppercase tracking-[.25em] text-white/70">
+            <div
+              className="
+                flex
+                h-full
+                flex-col
+                justify-between
+                bg-[linear-gradient(145deg,#0B4B4C,#D4A257)]
+                p-4
+                text-white
+              "
+            >
+              <span className="text-[8px] uppercase tracking-[0.16em] text-white/70">
                 Pure Publications
               </span>
-              <h3 className="font-serif text-xl leading-tight">{journal.title}</h3>
-              <span className="text-[10px]">ISSN {journal.issn}</span>
+
+              <h3 className="font-serif text-[17px] leading-[1.25]">
+                {journal.title}
+              </h3>
+
+              <span className="text-[8px] text-white/75">
+                ISSN: {journal.issn}
+              </span>
             </div>
           )}
+
+          {/* IMAGE HOVER OVERLAY */}
+          <span
+            aria-hidden="true"
+            className="
+              pointer-events-none
+              absolute inset-0
+              bg-gradient-to-t
+              from-[#073F40]/12
+              via-transparent
+              to-transparent
+              opacity-0
+              transition-opacity
+              duration-300
+              group-hover:opacity-100
+            "
+          />
         </div>
 
-        <h3 className="mt-3 min-h-[38px] line-clamp-2 text-[11px] font-semibold leading-[1.55] text-[#153D3E]">
+        {/* JOURNAL TITLE */}
+        <h3
+          className="
+            mx-auto
+            mt-3
+            min-h-[38px]
+            max-w-[165px]
+            text-[10px]
+            font-semibold
+            leading-[1.45]
+            text-[#163D3E]
+            transition-colors
+            duration-300
+
+            group-hover:text-[#D4A257]
+
+            sm:text-[11px]
+          "
+        >
           {journal.title}
         </h3>
 
-        <p className="mt-1 text-[9px] text-slate-500">ISSN: {journal.issn}</p>
+        {/* ISSN */}
+        <p
+          className="
+            mx-auto
+            mt-2
+            max-w-[165px]
+            text-[8px]
+            leading-none
+            text-slate-500
 
-        <span className="mt-2 inline-flex rounded-full bg-[#F0F2F1] px-2.5 py-1 text-[8px] text-slate-600">
-          {journal.index}
+            sm:text-[9px]
+          "
+        >
+          ISSN: {journal.issn}
+        </p>
+
+        {/* INDEXING BADGE */}
+        <span
+          className="
+            mx-auto
+            mt-3
+            inline-flex
+            rounded-full
+            border border-[#DDE2E0]
+            bg-[#EEF1F0]
+            px-2.5
+            py-1
+            text-[7px]
+            font-medium
+            leading-none
+            text-[#596565]
+            transition-all
+            duration-300
+
+            group-hover:border-[#D4A257]/40
+            group-hover:bg-[#D4A257]/10
+            group-hover:text-[#8D682E]
+
+            sm:text-[8px]
+          "
+        >
+          {journal.index || "Scopus"}
         </span>
       </Link>
     </motion.article>
@@ -420,6 +744,36 @@ export default function Home() {
 
   const previous = () => setPage((current) => (current <= 0 ? maxPage : current - 1));
   const next = () => setPage((current) => (current >= maxPage ? 0 : current + 1));
+
+const [itemsPerPage, setItemsPerPage] = useState(5);
+
+useEffect(() => {
+  const updateItemsPerPage = () => {
+    const width = window.innerWidth;
+
+    if (width < 520) {
+      setItemsPerPage(2);
+    } else if (width < 768) {
+      setItemsPerPage(3);
+    } else if (width < 1024) {
+      setItemsPerPage(4);
+    } else {
+      setItemsPerPage(5);
+    }
+  };
+
+  updateItemsPerPage();
+
+  window.addEventListener("resize", updateItemsPerPage);
+
+  return () => {
+    window.removeEventListener(
+      "resize",
+      updateItemsPerPage
+    );
+  };
+}, []);
+
 
   useEffect(() => {
     const id = window.setInterval(next, 6000);
@@ -480,64 +834,225 @@ export default function Home() {
       </Helmet>
 
       <main className="overflow-hidden bg-white text-slate-800">
-        {/* HERO */}
-        <section className="relative bg-[linear-gradient(90deg,#fff_0%,#fff_48%,#F7F7F5_100%)]">
-          <div className="mx-auto grid min-h-[430px] max-w-[1180px] items-center gap-7 px-5 pb-16 pt-12 sm:px-8 lg:grid-cols-[44%_56%] lg:px-10 lg:pb-20 lg:pt-10">
-            <motion.div
-              initial={{ opacity: 0, x: -38 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.75, ease: "easeOut" }}
-              className="relative z-10 max-w-[440px]"
-            >
-              <h1 className="font-serif text-[42px] font-medium leading-[.98] tracking-[-.035em] text-[#123839] sm:text-[54px] lg:text-[58px]">
-                Where Your
-                <br />
-                Research Meets
-                <br />
-                <span className="text-[#D4A257]">Recognition</span>
-              </h1>
+      
+{/* HERO + FLOATING STATS */}
+<section
+  className="
+    relative
+    isolate
+    overflow-visible
+    bg-white
+    pt-[55px]
+  "
+>
+  {/* FULL HERO BACKGROUND IMAGE */}
+  <motion.div
+    initial={{ opacity: 0, scale: 1.025 }}
+    animate={{ opacity: 1, scale: 1 }}
+    transition={{
+      duration: 1,
+      ease: [0.22, 1, 0.36, 1],
+    }}
+    className="
+      absolute inset-x-0 top-[60px]
+      h-[490px]
+      bg-cover
+      bg-center
+      bg-no-repeat
 
-              <p className="mt-5 max-w-[360px] text-[12px] leading-5 text-slate-600 sm:text-[13px]">
-                Your dedicated partner in academic excellence
-                <br className="hidden sm:block" /> and professional writing.
-              </p>
+      sm:h-[535px]
 
-              <div className="mt-6 flex flex-wrap gap-4">
-                <ActionButton to="/services">Explore Services</ActionButton>
-                <ActionButton to="/submit-paper" light>
-                  Submit Your Paper
-                </ActionButton>
-              </div>
-            </motion.div>
+      lg:h-[415px]
+      lg:bg-[center_48%]
+    "
+    style={{
+      backgroundImage: `url(${heroBackground})`,
+    }}
+    role="img"
+    aria-label="Academic books, laptop and research publishing workspace"
+  />
 
-            <motion.div
-              initial={{ opacity: 0, x: 38, scale: 0.98 }}
-              animate={{ opacity: 1, x: 0, scale: 1 }}
-              transition={{ duration: 0.85, ease: "easeOut" }}
-              className="relative h-[300px] overflow-hidden rounded-tl-[62px] rounded-br-[58px] sm:h-[390px] lg:h-[430px]"
-            >
-              <img
-                src={heroBackground}
-                alt="Academic books, research laptop and scholarly publishing icons"
-                fetchPriority="high"
-                className="h-full w-full object-cover"
-              />
-              <div className="pointer-events-none absolute inset-0 bg-gradient-to-r from-black/5 via-transparent to-black/10" />
-            </motion.div>
-          </div>
+  {/* RESPONSIVE BACKGROUND OVERLAY FOR TEXT READABILITY */}
+ 
 
-          {/* FLOATING TOP STATS */}
-        {/* FLOATING TOP STATISTICS */}
+  {/* HERO CONTENT */}
+  <div
+    className="
+      relative z-10
+      mx-auto
+      min-h-[495px]
+      max-w-[1140px]
+      px-4
+      pb-[120px]
+      pt-12
+
+      sm:min-h-[435px]
+      sm:px-6
+      sm:pt-16
+
+      lg:min-h-[445px]
+      lg:px-8
+      lg:pb-[95px]
+      lg:pt-[52px]
+
+      xl:px-0
+    "
+  >
+    <motion.div
+      initial={{
+        opacity: 0,
+        x: -42,
+      }}
+      animate={{
+        opacity: 1,
+        x: 0,
+      }}
+      transition={{
+        duration: 0.82,
+        ease: [0.22, 1, 0.36, 1],
+      }}
+      className="
+        mx-auto
+        max-w-[430px]
+        text-center
+
+        sm:mx-0
+        sm:text-left
+      "
+    >
+      <h1
+        className="
+          
+          text-[40px]
+          font-medium
+          leading-[1.08]
+          tracking-[-0.035em]
+          text-[#123839]
+
+          sm:text-[40px]
+
+          lg:text-[46px]
+        "
+      >
+        Where Your
+        <br />
+        Research Meets
+        <br />
+
+        <motion.span
+          initial={{
+            opacity: 0,
+            y: 8,
+          }}
+          animate={{
+            opacity: 1,
+            y: 0,
+          }}
+          transition={{
+            delay: 0.3,
+            duration: 0.6,
+          }}
+          className="inline-block text-[#D4A257]"
+        >
+          Recognition
+        </motion.span>
+      </h1>
+
+      <motion.p
+        initial={{
+          opacity: 0,
+          y: 10,
+        }}
+        animate={{
+          opacity: 1,
+          y: 0,
+        }}
+        transition={{
+          delay: 0.42,
+          duration: 0.55,
+        }}
+        className="
+          mx-auto mt-5
+          max-w-[355px]
+          text-[12px]
+          leading-[1.7]
+          text-slate-600
+
+          sm:mx-0
+          sm:text-[14.5px]
+        "
+      >
+        Your dedicated partner in academic 
+        <br className="hidden sm:block" />
+        excellence and professional writing.
+      </motion.p>
+
+      <motion.div
+        initial={{
+          opacity: 0,
+          y: 12,
+        }}
+        animate={{
+          opacity: 1,
+          y: 0,
+        }}
+        transition={{
+          delay: 0.52,
+          duration: 0.55,
+        }}
+        className="
+          mt-6
+          flex flex-wrap
+          justify-center
+          gap-3
+
+          sm:justify-start
+        "
+      >
+        <ActionButton
+          to="/services"
+          className="
+            min-h-[43px]
+            rounded-[7px]
+            px-5
+            text-[11px]
+          "
+        >
+          Explore Services
+        </ActionButton>
+
+        <ActionButton
+          to="/submit-paper"
+          light
+          className="
+            min-h-[43px]
+            rounded-[7px]
+            border-black/40
+            bg-white/95
+            px-5
+            text-[11px]
+            shadow-[0_8px_22px_rgba(7,63,64,0.08)]
+            backdrop-blur-sm
+          "
+        >
+          Submit Your Paper
+        </ActionButton>
+      </motion.div>
+    </motion.div>
+  </div>
+
+  
+ {/* FLOATING TOP STATISTICS */}
 <section
   aria-label="Pure Publications statistics"
   className="relative z-20"
 >
   <div
     className="
-      mx-auto -mt-11 w-full
-      max-w-[1090px]
+      mx-auto -mt-10 w-full
+      max-w-[1140px]
       px-4
-      sm:-mt-12 sm:px-6
+      sm:-mt-10 sm:px-6
       lg:-mt-[52px] lg:px-8
       xl:px-0
     "
@@ -607,163 +1122,712 @@ export default function Home() {
     </motion.div>
   </div>
 </section>
-        </section>
+</section>
 
-        {/* INDEXING */}
-        <section className="mx-auto max-w-[1080px] px-5 pt-5 sm:px-8">
-          <motion.div
-            variants={fadeUp}
-            initial="hidden"
-            whileInView="show"
-            viewport={{ once: true, amount: 0.35 }}
-            transition={{ duration: 0.55 }}
-            className="flex flex-wrap items-center justify-center gap-x-7 gap-y-4 rounded-[11px] bg-[#073F40] px-5 py-4 text-white shadow-[0_12px_28px_rgba(7,63,64,.18)] lg:justify-between"
-          >
-            <span className="text-[10px] font-semibold text-[#D4A257]">
-              Trusted & Indexed By
-            </span>
+       
+      {/* TRUSTED AND INDEXED SECTION */}
+<section
+  aria-label="Trusted and indexed by"
+  className="relative z-20 mx-auto w-full max-w-[1180px] px-4 pt-5 sm:px-6 lg:px-6"
+>
+  <motion.div
+    initial={{
+      opacity: 0,
+      y: 24,
+      scale: 0.985,
+    }}
+    whileInView={{
+      opacity: 1,
+      y: 0,
+      scale: 1,
+    }}
+    viewport={{
+      once: true,
+      amount: 0.25,
+    }}
+    transition={{
+      duration: 0.65,
+      ease: [0.22, 1, 0.36, 1],
+    }}
+    className="
+      relative
+      overflow-hidden
+      rounded-[15px]
+      border border-white/10
+      bg-[#063F40]
+      shadow-[0_14px_34px_rgba(6,63,64,0.2)]
+    "
+  >
+    {/* SUBTLE BACKGROUND EFFECT */}
+    <div
+      aria-hidden="true"
+      className="
+        pointer-events-none
+        absolute inset-0
+        bg-[radial-gradient(circle_at_25%_50%,rgba(20,103,101,0.34),transparent_35%),linear-gradient(90deg,#063F40_0%,#084849_50%,#063F40_100%)]
+      "
+    />
 
-            <span className="inline-flex items-center gap-2 text-[13px] font-semibold">
-              <span className="h-0 w-0 border-b-[7px] border-l-[12px] border-t-[7px] border-b-transparent border-l-[#F2B84B] border-t-transparent" />
-              Crossref
-            </span>
+    {/* SCROLLABLE CONTENT */}
+    <div
+      className="
+        indexing-scrollbar-hidden
+        relative z-10
+        flex
+        min-h-[84px]
+        items-center
+        gap-8
+        overflow-x-auto
+        px-5
+        py-3
 
-            <span className="flex h-8 w-8 items-center justify-center rounded-full bg-white text-[11px] font-bold text-[#073F40]">
-              DOI
-            </span>
+        sm:min-h-[98px]
+        sm:px-7
 
-            <span className="text-center leading-3">
-              <b className="block text-[13px]">Google</b>
-              <span className="text-[8px]">Scholar</span>
-            </span>
+        lg:justify-between
+        lg:gap-6
+        lg:overflow-visible
+        lg:px-7
 
-            <span className="text-center text-[9px] font-semibold leading-3">
-              OPEN
-              <br />
-              ACCESS
-            </span>
+        xl:px-8
+      "
+    >
+      {/* HEADING */}
+      <motion.div
+        initial={{ opacity: 0, x: -16 }}
+        whileInView={{ opacity: 1, x: 0 }}
+        viewport={{ once: true }}
+        transition={{
+          delay: 0.1,
+          duration: 0.5,
+        }}
+        className="
+          flex
+          min-w-[130px]
+          shrink-0
+          items-center
+        "
+      >
+        <span
+          className="
+            whitespace-nowrap
+            text-[12px]
+            font-semibold
+            tracking-[-0.01em]
+            text-[#D6A652]
 
-            <span className="text-[17px] font-medium tracking-tight">ORCID</span>
-            <span className="text-[16px]">Scopus</span>
-            <span className="text-[15px] font-bold">ISI</span>
+            sm:text-[14px]
+          "
+        >
+          Trusted &amp; Indexed By
+        </span>
+      </motion.div>
 
-            <Link
-              to="/indexing"
-              aria-label="View indexing information"
-              className="flex h-9 w-9 items-center justify-center rounded-full border border-[#D4A257] text-[#D4A257] transition-all hover:rotate-[-8deg] hover:bg-[#D4A257] hover:text-[#073F40]"
-            >
-              <ArrowRight size={15} />
-            </Link>
-          </motion.div>
-        </section>
+      {/* LOGOS */}
+      {INDEXING_PARTNERS.map((partner, index) => (
+        <motion.div
+          key={partner.name}
+          initial={{
+            opacity: 0,
+            y: 12,
+          }}
+          whileInView={{
+            opacity: 1,
+            y: 0,
+          }}
+          viewport={{ once: true }}
+          transition={{
+            delay: 0.12 + index * 0.07,
+            duration: 0.45,
+            ease: [0.22, 1, 0.36, 1],
+          }}
+          whileHover={{
+            y: -3,
+            scale: 1.04,
+          }}
+          className="
+            group
+            flex
+            min-w-[85px]
+            shrink-0
+            items-center
+            justify-center
+            px-1
+          "
+        >
+          <img
+            src={partner.image}
+            alt={partner.alt}
+            loading="lazy"
+            draggable={false}
+            className={`
+              w-auto
+              object-contain
+              brightness-0
+              invert
+              opacity-95
+              transition-all
+              duration-300
 
-        {/* SERVICES */}
-        <section className="mx-auto max-w-[1080px] px-5 py-11 sm:px-8 lg:py-14">
-          <div className="mb-7 flex flex-col justify-between gap-4 sm:flex-row sm:items-end">
-            <div>
-              <span className="text-[9px] font-semibold uppercase tracking-wide text-[#D4A257]">
-                Our Services
-              </span>
-              <h2 className="mt-2 font-serif text-[25px] font-semibold text-[#153D3E]">
-                Elevate Your Academic Success
-              </h2>
-              <p className="mt-2 max-w-[420px] text-[10px] leading-[1.65] text-slate-600">
-                Comprehensive services designed to support your research journey
-                from idea to publication.
-              </p>
-            </div>
+              group-hover:opacity-100
+              group-hover:drop-shadow-[0_5px_12px_rgba(255,255,255,0.16)]
 
-            <ActionButton
-              to="/services"
-              className="self-start px-6 sm:self-auto"
-            >
-              View All Services
-            </ActionButton>
-          </div>
+              ${
+                partner.name === "Crossref"
+                  ? "h-[34px] max-w-[105px]"
+                  : partner.name === "DOI"
+                    ? "h-[38px] max-w-[54px]"
+                    : partner.name === "Google Scholar"
+                      ? "h-[38px] max-w-[96px]"
+                      : partner.name === "Open Access"
+                        ? "h-[30px] max-w-[98px]"
+                        : partner.name === "ORCID"
+                          ? "h-[27px] max-w-[76px]"
+                          : partner.name === "Scopus"
+                            ? "h-[28px] max-w-[78px]"
+                            : "h-[31px] max-w-[86px]"
+              }
+            `}
+          />
+        </motion.div>
+      ))}
 
-          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-5">
-            {SERVICES.map((item, index) => (
-              <ServiceCard key={item.title} item={item} index={index} />
-            ))}
-          </div>
-        </section>
+     
+    </div>
 
-        {/* JOURNALS */}
-        <section className="mx-auto max-w-[1080px] px-5 pb-10 sm:px-8">
-          <div className="mb-6 flex items-end justify-between gap-4">
-            <div>
-              <h2 className="font-serif text-[22px] font-semibold text-[#153D3E]">
-                Latest Additions
-              </h2>
-              <p className="mt-1.5 text-[9px] text-slate-600">
-                Discover the newest entries in our Latest Additions section!
-              </p>
-            </div>
+    {/* MOBILE SCROLL INDICATOR */}
+    <div
+      aria-hidden="true"
+      className="
+        pointer-events-none
+        absolute
+        inset-y-0
+        right-0
+        z-20
+        w-12
+        bg-gradient-to-l
+        from-[#063F40]
+        to-transparent
 
-            <Link
-              to="/journals"
-              className="group hidden items-center gap-2 text-[10px] font-semibold text-[#073F40] sm:flex"
-            >
-              View all journals
-              <ArrowRight
-                size={13}
-                className="transition-transform group-hover:translate-x-1"
-              />
-            </Link>
-          </div>
+        lg:hidden
+      "
+    />
+  </motion.div>
+</section>
 
-          <div className="relative">
-            <button
-              type="button"
-              onClick={previous}
-              aria-label="Previous journals"
-              className="absolute -left-4 top-[40%] z-20 hidden h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full border border-slate-200 bg-white text-[#073F40] shadow-md transition hover:scale-105 hover:bg-[#073F40] hover:text-white lg:flex"
-            >
-              <ChevronLeft size={18} />
-            </button>
+     {/* SERVICES SECTION */}
+<section
+  aria-labelledby="services-heading"
+  className="
+    mx-auto
+    w-full
+    max-w-[1180px]
+    px-4
+    py-11
 
-            <AnimatePresence mode="wait">
-              <motion.div
-                key={page}
-                initial={{ opacity: 0, x: 26 }}
-                animate={{ opacity: 1, x: 0 }}
-                exit={{ opacity: 0, x: -26 }}
-                transition={{ duration: 0.35 }}
-                className="grid grid-cols-2 gap-5 sm:grid-cols-3 lg:grid-cols-5"
-              >
-                {visibleJournals.map((journal) => (
-                  <JournalCard key={journal.id} journal={journal} />
-                ))}
-              </motion.div>
-            </AnimatePresence>
+    sm:px-6
+    sm:py-12
 
-            <button
-              type="button"
-              onClick={next}
-              aria-label="Next journals"
-              className="absolute -right-4 top-[40%] z-20 hidden h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full border border-slate-200 bg-white text-[#073F40] shadow-md transition hover:scale-105 hover:bg-[#073F40] hover:text-white lg:flex"
-            >
-              <ChevronRight size={18} />
-            </button>
-          </div>
+    lg:px-8
+    lg:py-14
 
-          <div className="mt-5 flex justify-center gap-2">
-            {Array.from({ length: maxPage + 1 }).map((_, index) => (
-              <button
-                key={index}
-                type="button"
-                onClick={() => setPage(index)}
-                aria-label={`Show journal group ${index + 1}`}
-                className={[
-                  "h-1.5 rounded-full transition-all duration-300",
-                  page === index
-                    ? "w-7 bg-[#073F40]"
-                    : "w-4 bg-slate-300 hover:bg-slate-400",
-                ].join(" ")}
-              />
-            ))}
-          </div>
-        </section>
+    xl:px-0
+  "
+>
+  {/* SECTION HEADER */}
+  <motion.div
+    initial={{
+      opacity: 0,
+      y: 20,
+    }}
+    whileInView={{
+      opacity: 1,
+      y: 0,
+    }}
+    viewport={{
+      once: true,
+      amount: 0.35,
+    }}
+    transition={{
+      duration: 0.55,
+      ease: [0.22, 1, 0.36, 1],
+    }}
+    className="
+      mb-7
+      flex
+      flex-col
+      justify-between
+      gap-5
+
+      sm:flex-row
+      sm:items-end
+
+      lg:mb-8
+    "
+  >
+    <div>
+      <span
+        className="
+          text-[9px]
+          font-semibold
+          uppercase
+          tracking-[0.04em]
+          text-[#D4A257]
+
+          sm:text-[10px]
+        "
+      >
+        Our Services
+      </span>
+
+      <h2
+        id="services-heading"
+        className="
+          mt-2
+          font-serif
+          text-[24px]
+          font-semibold
+          leading-tight
+          tracking-[-0.025em]
+          text-[#153D3E]
+
+          sm:text-[27px]
+
+          lg:text-[29px]
+        "
+      >
+        Elevate Your Academic Success
+      </h2>
+
+      <p
+        className="
+          mt-2
+          max-w-[435px]
+          text-[10px]
+          leading-[1.75]
+          text-slate-600
+
+          sm:text-[11px]
+        "
+      >
+        Comprehensive services designed to support your research journey
+        <br className="hidden sm:block" />
+        from idea to publication.
+      </p>
+    </div>
+
+    <ActionButton
+      to="/services"
+      className="
+        min-h-[44px]
+        self-start
+        rounded-[7px]
+        px-6
+        text-[10px]
+
+        sm:self-auto
+      "
+    >
+      View All Services
+    </ActionButton>
+  </motion.div>
+
+  {/* SERVICE CARDS */}
+  <div
+    className="
+      grid
+      grid-cols-1
+      gap-4
+
+      min-[480px]:grid-cols-2
+
+      md:grid-cols-3
+
+      lg:grid-cols-5
+      lg:gap-[18px]
+    "
+  >
+    {SERVICES.map((item, index) => (
+      <ServiceCard
+        key={item.title}
+        item={item}
+        index={index}
+      />
+    ))}
+  </div>
+</section>
+
+      {/* LATEST JOURNALS */}
+<section
+  aria-labelledby="latest-journals-heading"
+  className="
+    mx-auto
+    w-full
+    max-w-[1180px]
+    px-4
+    pb-10
+    pt-2
+
+    sm:px-6
+    sm:pb-12
+
+    lg:px-8
+    lg:pb-14
+
+    xl:px-0
+  "
+>
+  {/* SECTION HEADER */}
+  <motion.div
+    initial={{
+      opacity: 0,
+      y: 18,
+    }}
+    whileInView={{
+      opacity: 1,
+      y: 0,
+    }}
+    viewport={{
+      once: true,
+      amount: 0.35,
+    }}
+    transition={{
+      duration: 0.55,
+      ease: [0.22, 1, 0.36, 1],
+    }}
+    className="
+      mb-6
+      flex
+      items-end
+      justify-between
+      gap-4
+
+      sm:mb-7
+    "
+  >
+    <div>
+      <h2
+        id="latest-journals-heading"
+        className="
+          font-serif
+          text-[21px]
+          font-semibold
+          leading-tight
+          tracking-[-0.02em]
+          text-[#153D3E]
+
+          sm:text-[23px]
+        "
+      >
+        Latest Additions
+      </h2>
+
+      <p
+        className="
+          mt-1.5
+          text-[8px]
+          leading-[1.6]
+          text-slate-600
+
+          sm:text-[9px]
+        "
+      >
+        Discover the newest entries in our Latest Additions section!
+      </p>
+    </div>
+
+    <Link
+      to="/journals"
+      className="
+        group
+        hidden
+        items-center
+        gap-3
+        whitespace-nowrap
+        text-[9px]
+        font-semibold
+        text-[#073F40]
+        transition-colors
+        duration-300
+
+        hover:text-[#D4A257]
+
+        sm:flex
+        sm:text-[10px]
+      "
+    >
+      View all journals
+
+      <ArrowRight
+        size={14}
+        strokeWidth={1.8}
+        className="
+          transition-transform
+          duration-300
+          group-hover:translate-x-1.5
+        "
+      />
+    </Link>
+  </motion.div>
+
+  {/* JOURNAL SLIDER */}
+  <div className="relative">
+    {/* PREVIOUS BUTTON */}
+    <motion.button
+      type="button"
+      onClick={previous}
+      aria-label="Show previous journals"
+      whileHover={{
+        scale: 1.08,
+      }}
+      whileTap={{
+        scale: 0.92,
+      }}
+      className="
+        absolute
+        -left-5
+        top-[36%]
+        z-20
+        hidden
+        h-[40px]
+        w-[40px]
+        -translate-y-1/2
+        items-center
+        justify-center
+        rounded-full
+        border
+        border-[#E0E4E2]
+        bg-white
+        text-[#073F40]
+        shadow-[0_8px_22px_rgba(7,63,64,0.11)]
+        transition-all
+        duration-300
+
+        hover:border-[#073F40]
+        hover:bg-[#073F40]
+        hover:text-white
+        hover:shadow-[0_12px_28px_rgba(7,63,64,0.2)]
+
+        lg:flex
+      "
+    >
+      <ChevronLeft size={18} strokeWidth={1.8} />
+    </motion.button>
+
+    {/* JOURNAL ITEMS */}
+    <div className="overflow-hidden">
+      <AnimatePresence mode="wait" initial={false}>
+        <motion.div
+          key={page}
+          initial={{
+            opacity: 0,
+            x: 34,
+          }}
+          animate={{
+            opacity: 1,
+            x: 0,
+          }}
+          exit={{
+            opacity: 0,
+            x: -34,
+          }}
+          transition={{
+            duration: 0.38,
+            ease: [0.22, 1, 0.36, 1],
+          }}
+          className="
+            grid
+            grid-cols-2
+            gap-x-5
+            gap-y-8
+
+            min-[520px]:grid-cols-3
+
+            md:grid-cols-4
+            md:gap-x-6
+
+            lg:grid-cols-5
+            lg:gap-x-8
+          "
+        >
+          {visibleJournals.map((journal, index) => (
+            <JournalCard
+              key={journal.id}
+              journal={journal}
+              index={index}
+            />
+          ))}
+        </motion.div>
+      </AnimatePresence>
+    </div>
+
+    {/* NEXT BUTTON */}
+    <motion.button
+      type="button"
+      onClick={next}
+      aria-label="Show next journals"
+      whileHover={{
+        scale: 1.08,
+      }}
+      whileTap={{
+        scale: 0.92,
+      }}
+      className="
+        absolute
+        -right-5
+        top-[36%]
+        z-20
+        hidden
+        h-[40px]
+        w-[40px]
+        -translate-y-1/2
+        items-center
+        justify-center
+        rounded-full
+        border
+        border-[#E0E4E2]
+        bg-white
+        text-[#073F40]
+        shadow-[0_8px_22px_rgba(7,63,64,0.11)]
+        transition-all
+        duration-300
+
+        hover:border-[#073F40]
+        hover:bg-[#073F40]
+        hover:text-white
+        hover:shadow-[0_12px_28px_rgba(7,63,64,0.2)]
+
+        lg:flex
+      "
+    >
+      <ChevronRight size={18} strokeWidth={1.8} />
+    </motion.button>
+  </div>
+
+  {/* MOBILE NAVIGATION BUTTONS */}
+  <div
+    className="
+      mt-7
+      flex
+      items-center
+      justify-between
+
+      lg:hidden
+    "
+  >
+    <button
+      type="button"
+      onClick={previous}
+      aria-label="Show previous journals"
+      className="
+        flex
+        h-10
+        w-10
+        items-center
+        justify-center
+        rounded-full
+        border
+        border-[#E0E4E2]
+        bg-white
+        text-[#073F40]
+        shadow-sm
+        transition-all
+
+        active:scale-95
+        active:bg-[#073F40]
+        active:text-white
+      "
+    >
+      <ChevronLeft size={18} />
+    </button>
+
+    <Link
+      to="/journals"
+      className="
+        inline-flex
+        items-center
+        gap-2
+        text-[10px]
+        font-semibold
+        text-[#073F40]
+
+        sm:hidden
+      "
+    >
+      View all journals
+      <ArrowRight size={13} />
+    </Link>
+
+    <button
+      type="button"
+      onClick={next}
+      aria-label="Show next journals"
+      className="
+        flex
+        h-10
+        w-10
+        items-center
+        justify-center
+        rounded-full
+        border
+        border-[#E0E4E2]
+        bg-white
+        text-[#073F40]
+        shadow-sm
+        transition-all
+
+        active:scale-95
+        active:bg-[#073F40]
+        active:text-white
+      "
+    >
+      <ChevronRight size={18} />
+    </button>
+  </div>
+
+  {/* PAGINATION */}
+  {maxPage > 0 && (
+    <div
+      className="
+        mt-6
+        flex
+        items-center
+        justify-center
+        gap-3
+      "
+    >
+      {Array.from({
+        length: maxPage + 1,
+      }).map((_, index) => (
+        <motion.button
+          key={index}
+          type="button"
+          onClick={() => setPage(index)}
+          aria-label={`Show journal group ${index + 1}`}
+          aria-current={page === index ? "true" : undefined}
+          whileHover={{
+            scale: 1.1,
+          }}
+          whileTap={{
+            scale: 0.9,
+          }}
+          className={`
+            h-[3px]
+            rounded-full
+            transition-all
+            duration-300
+
+            ${
+              page === index
+                ? "w-7 bg-[#073F40]"
+                : "w-4 bg-[#BFC7C4] hover:bg-[#7B8985]"
+            }
+          `}
+        />
+      ))}
+    </div>
+  )}
+</section>
 
         {/* DARK STATS */}
         <section className="mx-auto max-w-[1100px] px-5 pb-3 sm:px-8">
