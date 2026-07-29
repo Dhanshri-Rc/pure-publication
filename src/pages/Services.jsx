@@ -497,7 +497,7 @@ export default function Services() {
                       </div>
 
                       <div>
-                        <p className="font-serif text-[28px] font-semibold leading-none text-[#183f3c]">
+                        <p className="font-serif text-[26px] font-[550] leading-none text-[#183f3c]">
                           <AnimatedCounter
                             value={stat.value}
                             suffix={stat.suffix}
@@ -655,7 +655,7 @@ export default function Services() {
                       <Icon size={24} strokeWidth={1.8} />
                     </div>
 
-                    <h3 className="mt-5 text-[13px] font-bold text-[#163d3a]">
+                    <h3 className="mt-5 text-[13px] font-[550] text-[#163d3a]">
                       {benefit.title}
                     </h3>
 
@@ -709,7 +709,7 @@ export default function Services() {
                 whileInView="visible"
                 viewport={{ once: true }}
               >
-                <h2 className="font-serif text-[27px] font-semibold leading-[1.08] text-white sm:text-[32px]">
+                <h2 className="font-serif text-[22px] font-semibold leading-[1.08] text-white sm:text-[25px]">
                   Empowering Research,
                   <span className="block">Enriching Knowledge</span>
                 </h2>
@@ -781,7 +781,7 @@ export default function Services() {
                         className="mx-auto text-[#d6a540] transition-transform duration-300 group-hover:scale-110"
                       />
 
-                      <p className="mt-4 font-serif text-[24px] font-semibold leading-none text-white">
+                      <p className="mt-4 font-serif text-[24px] font-[550] leading-none text-white">
                         <AnimatedCounter
                           value={stat.value}
                           suffix={stat.suffix}
@@ -842,8 +842,8 @@ export default function Services() {
                       className="
                         mx-auto
                         flex
-                        h-[76px]
-                        w-[76px]
+                        h-[66px]
+                        w-[66px]
                         items-center
                         justify-center
                         rounded-full
