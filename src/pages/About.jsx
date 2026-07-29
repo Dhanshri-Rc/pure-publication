@@ -1,135 +1,3 @@
-// import {
-//   Target,
-//   Eye,
-//   HeartHandshake,
-//   ShieldCheck,
-//   Lightbulb,
-//   Users2,
-// } from "lucide-react";
-// import Seo from "../components/Seo";
-// import Hero from "../components/Hero";
-// import SectionTitle from "../components/SectionTitle";
-// import Card from "../components/Card";
-// import AnimatedSection from "../components/AnimatedSection";
-// import useCountUp from "../hooks/useCountUp";
-
-// const TIMELINE = [
-//   { year: "2014", title: "Founded", text: "Pure Publication was established with a vision to simplify academic publishing." },
-//   { year: "2017", title: "10 Journals Launched", text: "Expanded into Engineering, Medicine, and Social Sciences disciplines." },
-//   { year: "2020", title: "Global Indexing", text: "Partnered with international indexing bodies for wider research visibility." },
-//   { year: "2024", title: "48+ Active Journals", text: "Now serving researchers across 90+ countries with fast, transparent review." },
-// ];
-
-// const VALUES = [
-//   { icon: ShieldCheck, title: "Integrity", description: "Every submission goes through honest, unbiased, rigorous peer review." },
-//   { icon: Lightbulb, title: "Innovation", description: "We continuously improve our processes with modern publishing technology." },
-//   { icon: Users2, title: "Collaboration", description: "We work closely with authors, reviewers, and institutions alike." },
-//   { icon: HeartHandshake, title: "Accessibility", description: "Open access publishing to make research available to everyone." },
-// ];
-
-// const STATS = [
-//   { value: 12500, suffix: "+", label: "Articles Published" },
-//   { value: 48, suffix: "+", label: "Active Journals" },
-//   { value: 3200, suffix: "+", label: "Expert Reviewers" },
-//   { value: 92, suffix: "+", label: "Countries Served" },
-// ];
-
-// function Stat({ value, suffix, label }) {
-//   const { ref, value: animated } = useCountUp(value);
-//   return (
-//     <div ref={ref} className="text-center">
-//       <p className="text-4xl font-heading font-bold text-navy-900">
-//         {animated.toLocaleString()}
-//         {suffix}
-//       </p>
-//       <p className="text-navy-500 text-sm mt-2">{label}</p>
-//     </div>
-//   );
-// }
-
-// export default function About() {
-//   return (
-//     <>
-//       <Seo
-//         title="About Us"
-//         description="Learn about Pure Publication's mission, vision, values, and journey supporting academic research publishing worldwide."
-//         path="/about"
-//       />
-
-//       <Hero
-//         breadcrumb="About"
-//         eyebrow="Our Story"
-//         title="Championing Research"
-//         highlight="Since 2014"
-//         description="We are a team of editors, reviewers, and technologists dedicated to making academic publishing faster, fairer, and more transparent."
-//         image="https://images.unsplash.com/photo-1552664730-d307ca884978?q=80&w=1200&auto=format&fit=crop"
-//         primaryAction={{ label: "Our Services", to: "/services" }}
-//       />
-
-//       {/* MISSION / VISION */}
-//       <section className="py-24">
-//         <div className="container-custom grid md:grid-cols-2 gap-8">
-//           <AnimatedSection direction="left">
-//             <Card icon={Target} title="Our Mission" description="To provide researchers a credible, efficient, and globally accessible platform to publish high-quality peer-reviewed work." />
-//           </AnimatedSection>
-//           <AnimatedSection direction="right">
-//             <Card icon={Eye} title="Our Vision" description="To become the most trusted name in open-access academic publishing across every research discipline." />
-//           </AnimatedSection>
-//         </div>
-//       </section>
-
-//       {/* TIMELINE */}
-//       <section className="py-24 bg-navy-50">
-//         <div className="container-custom">
-//           <SectionTitle badge="Our Journey" title="A Decade of" highlight="Growth" />
-//           <div className="relative max-w-3xl mx-auto">
-//             <div className="absolute left-4 md:left-1/2 top-0 bottom-0 w-px bg-navy-200 md:-translate-x-1/2" />
-//             <div className="space-y-12">
-//               {TIMELINE.map((item, i) => (
-//                 <AnimatedSection
-//                   key={item.year}
-//                   direction={i % 2 === 0 ? "left" : "right"}
-//                   className={`relative flex md:justify-${i % 2 === 0 ? "start" : "end"} pl-12 md:pl-0`}
-//                 >
-//                   <div className="absolute left-4 md:left-1/2 top-1.5 w-3.5 h-3.5 rounded-full bg-amber-500 -translate-x-1/2 ring-4 ring-amber-100" />
-//                   <div className={`bg-white rounded-2xl p-6 shadow-card w-full md:w-[calc(50%-2rem)] ${i % 2 === 0 ? "md:mr-auto" : "md:ml-auto"}`}>
-//                     <span className="text-amber-600 font-heading font-bold text-lg">{item.year}</span>
-//                     <h4 className="font-heading font-semibold text-navy-900 mt-1 mb-2">{item.title}</h4>
-//                     <p className="text-navy-500 text-sm leading-relaxed">{item.text}</p>
-//                   </div>
-//                 </AnimatedSection>
-//               ))}
-//             </div>
-//           </div>
-//         </div>
-//       </section>
-
-//       {/* VALUES */}
-//       <section className="py-24">
-//         <div className="container-custom">
-//           <SectionTitle badge="What Drives Us" title="Our Core" highlight="Values" />
-//           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
-//             {VALUES.map((v, i) => (
-//               <Card key={v.title} {...v} delay={i * 0.1} />
-//             ))}
-//           </div>
-//         </div>
-//       </section>
-
-//       {/* STATS */}
-//       <section className="py-20 bg-white border-y border-navy-100">
-//         <div className="container-custom grid grid-cols-2 lg:grid-cols-4 gap-10">
-//           {STATS.map((s) => (
-//             <Stat key={s.label} {...s} />
-//           ))}
-//         </div>
-//       </section>
-//     </>
-//   );
-// }
-
-
-
 import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import { motion, useInView } from "framer-motion";
@@ -252,32 +120,27 @@ const BENEFITS = [
   {
     icon: BadgeCheck,
     title: "Quality Assurance",
-    description:
-      "We maintain the highest standards of academic quality.",
+    description: "We maintain the highest standards of academic quality.",
   },
   {
     icon: Clock3,
     title: "Timely Delivery",
-    description:
-      "On-time delivery without compromising on excellence.",
+    description: "On-time delivery without compromising on excellence.",
   },
   {
     icon: Globe2,
     title: "Global Reach",
-    description:
-      "Serving researchers from 120+ countries worldwide.",
+    description: "Serving researchers from 120+ countries worldwide.",
   },
   {
     icon: LockKeyhole,
     title: "Confidentiality",
-    description:
-      "Your data and research are always secure with us.",
+    description: "Your data and research are always secure with us.",
   },
   {
     icon: Headphones,
     title: "End-to-End Support",
-    description:
-      "We support you from concept to publication.",
+    description: "We support you from concept to publication.",
   },
 ];
 
@@ -457,7 +320,7 @@ function SectionHeading({
       </p>
 
       <h2
-        className={`font-serif text-[28px] font-semibold leading-tight sm:text-[34px] ${
+        className={`font-serif text-[22px] font-semibold leading-tight sm:text-[28px] ${
           light ? "text-white" : "text-[#062f2d]"
         }`}
       >
@@ -485,12 +348,27 @@ export default function About() {
             HERO SECTION
         ================================================= */}
         <section
-          className="relative min-h-[520px] overflow-hidden bg-white bg-cover bg-[70%_center] bg-no-repeat sm:min-h-[560px] lg:min-h-[620px] lg:bg-center"
+          className="relative overflow-hidden bg-white bg-cover bg-[70%_center] bg-no-repeat
+             min-h-[260px]
+             sm:min-h-[290px]
+             lg:min-h-[320px]
+             lg:bg-center"
           style={{
             backgroundImage: `url(${aboutBg})`,
           }}
         >
-          <div className="mx-auto flex min-h-[520px] max-w-[1440px] items-center px-5 py-16 sm:min-h-[560px] sm:px-8 lg:min-h-[620px] lg:px-16 xl:px-20">
+          <div
+            className="mx-auto flex items-center
+                  min-h-[260px]
+                  sm:min-h-[290px]
+                  lg:min-h-[320px]
+                  max-w-[1440px]
+                  px-5
+                  py-8
+                  sm:px-8
+                  lg:px-16
+                  xl:px-20"
+          >
             <motion.div
               initial="hidden"
               animate="visible"
@@ -498,7 +376,7 @@ export default function About() {
               className="relative z-10 w-full max-w-[690px]"
             >
               <motion.div variants={fadeUp}>
-                <div className="mb-9 flex items-center gap-3 text-[13px] font-medium text-[#536563]">
+                <div className="mb-9 mt-16 flex items-center gap-3 text-[13px] font-medium text-[#536563]">
                   <Link
                     to="/"
                     className="transition-colors duration-300 hover:text-[#c9953e]"
@@ -508,15 +386,17 @@ export default function About() {
 
                   <span className="text-[#9ca8a7]">›</span>
 
-                  <span className="font-semibold text-[#173f3c]">
-                    About Us
-                  </span>
+                  <span className="font-semibold text-[#173f3c]">About Us</span>
                 </div>
               </motion.div>
 
               <motion.h1
                 variants={fadeLeft}
-                className="font-serif text-[48px] font-semibold leading-[1.04] text-[#063330] sm:text-[60px] lg:text-[70px]"
+                className="font-serif font-semibold leading-[1.05]
+             text-[30px]
+             sm:text-[38px]
+             lg:text-[44px]
+             text-[#063330]"
               >
                 About
                 <span className="mt-2 block text-[#d0a151]">
@@ -585,7 +465,7 @@ export default function About() {
         {/* =================================================
             WHO WE ARE
         ================================================= */}
-        <section className="bg-white px-5 py-16 sm:px-8 lg:px-16 lg:py-20 xl:px-20">
+        <section className="bg-white px-5 py-10 sm:px-8 lg:px-16 lg:py-12 xl:px-20">
           <div className="mx-auto grid max-w-[1320px] gap-12 lg:grid-cols-[0.78fr_1.42fr] lg:gap-16">
             <motion.div
               variants={fadeLeft}
@@ -598,7 +478,7 @@ export default function About() {
                 Who We Are
               </p>
 
-              <h2 className="max-w-[440px] font-serif text-[31px] font-semibold leading-[1.12] text-[#063330] sm:text-[38px]">
+              <h2 className="max-w-[480px] font-serif text-[22px] font-semibold leading-[1.12] text-[#063330] sm:text-[28px]">
                 Empowering Research,
                 <span className="block">Enriching Knowledge</span>
               </h2>
@@ -620,7 +500,6 @@ export default function About() {
                   className="group inline-flex min-h-[45px] items-center gap-5 rounded-[6px] bg-[#003f3b] px-6 text-[13px] font-semibold text-white shadow-[0_10px_24px_rgba(0,63,59,0.2)] transition-all duration-300 hover:bg-[#c9953e] hover:shadow-[0_14px_30px_rgba(201,149,62,0.28)]"
                 >
                   Learn More About Us
-
                   <ArrowRight
                     size={17}
                     className="transition-transform duration-300 group-hover:translate-x-1"
@@ -739,7 +618,7 @@ export default function About() {
         {/* =================================================
             WHY CHOOSE US
         ================================================= */}
-        <section className="relative overflow-hidden bg-[#003f3b] px-5 py-14 sm:px-8 lg:px-16 xl:px-20">
+        <section className="relative overflow-hidden bg-[#003f3b] px-5 py-10 sm:px-8 lg:px-16 xl:px-20">
           <div
             className="absolute inset-0 opacity-[0.055]"
             style={{
@@ -802,7 +681,7 @@ export default function About() {
         {/* =================================================
             EDITORIAL ADVISORY BOARD
         ================================================= */}
-        <section className="bg-white px-5 py-16 sm:px-8 lg:px-16 lg:py-20 xl:px-20">
+        <section className="bg-white px-5 py-8 sm:px-8 lg:px-16 lg:py-10 xl:px-20">
           <div className="mx-auto max-w-[1320px]">
             <div className="flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between">
               <SectionHeading
@@ -822,7 +701,6 @@ export default function About() {
                   className="group inline-flex min-h-[43px] items-center gap-8 rounded-[6px] bg-[#003f3b] px-6 text-[12px] font-semibold text-white transition-all duration-300 hover:bg-[#c9953e]"
                 >
                   View All Members
-
                   <ArrowRight
                     size={16}
                     className="transition-transform duration-300 group-hover:translate-x-1"
@@ -901,7 +779,7 @@ export default function About() {
             whileInView="visible"
             viewport={{ once: true, amount: 0.35 }}
             whileHover={{ y: -4 }}
-            className="mx-auto flex max-w-[1320px] flex-col items-center gap-7 overflow-hidden rounded-[14px] bg-gradient-to-r from-[#f7f3ed] via-[#fcfaf7] to-[#f4eee6] px-7 py-7 shadow-[0_12px_30px_rgba(7,54,50,0.06)] sm:flex-row sm:justify-between sm:px-10"
+            className="mx-auto flex max-w-[1320px] flex-col items-center gap-7 overflow-hidden rounded-[14px] bg-gradient-to-r from-[#f7f3ed] via-[#fcfaf7] to-[#f4eee6] px-7 py-5 shadow-[0_12px_30px_rgba(7,54,50,0.06)] sm:flex-row sm:justify-between sm:px-10"
           >
             <div className="flex flex-col items-center gap-6 text-center sm:flex-row sm:text-left">
               <motion.div
@@ -917,7 +795,7 @@ export default function About() {
               </motion.div>
 
               <div>
-                <h2 className="max-w-[560px] font-serif text-[24px] font-semibold leading-[1.15] text-[#063330] sm:text-[28px]">
+                <h2 className="max-w-[560px] font-serif text-[20px] font-semibold leading-[1.15] text-[#063330] sm:text-[24px]">
                   Join Thousands of Researchers
                   <span className="block">Who Trust Pure Publications</span>
                 </h2>
@@ -934,7 +812,6 @@ export default function About() {
                 className="group inline-flex min-h-[48px] min-w-[225px] items-center justify-center gap-10 rounded-[7px] bg-[#003f3b] px-7 text-[13px] font-semibold text-white shadow-[0_10px_24px_rgba(0,63,59,0.18)] transition-all duration-300 hover:bg-[#c9953e]"
               >
                 Submit Your Paper
-
                 <ArrowRight
                   size={18}
                   className="transition-transform duration-300 group-hover:translate-x-1"
@@ -947,6 +824,3 @@ export default function About() {
     </>
   );
 }
-
-
-
