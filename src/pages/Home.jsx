@@ -834,7 +834,7 @@ useEffect(() => {
       </Helmet>
 
       <main className="overflow-hidden bg-white text-slate-800">
-      
+       
 {/* HERO + FLOATING STATS */}
 <section
   className="
@@ -1829,21 +1829,7 @@ useEffect(() => {
   )}
 </section>
 
-        {/* DARK STATS */}
-        <section className="mx-auto max-w-[1100px] px-5 pb-3 sm:px-8">
-          <motion.div
-            variants={fadeUp}
-            initial="hidden"
-            whileInView="show"
-            viewport={{ once: true, amount: 0.25 }}
-            transition={{ duration: 0.55 }}
-            className="grid grid-cols-2 gap-7 rounded-[16px] bg-[#073F40] px-5 py-6 shadow-[0_16px_35px_rgba(7,63,64,.18)] sm:grid-cols-3 lg:grid-cols-6"
-          >
-            {BOTTOM_STATS.map((item) => (
-              <StatItem key={item.label} item={item} dark />
-            ))}
-          </motion.div>
-        </section>
+     
 
         {/* CTA */}
         <section className="mx-auto max-w-[1100px] px-5 pb-14 sm:px-8">
