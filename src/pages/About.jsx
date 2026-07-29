@@ -678,101 +678,12 @@ export default function About() {
           </div>
         </section>
 
-        {/* =================================================
-            EDITORIAL ADVISORY BOARD
-        ================================================= */}
-        <section className="bg-white px-5 py-8 sm:px-8 lg:px-16 lg:py-10 xl:px-20">
-          <div className="mx-auto max-w-[1320px]">
-            <div className="flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between">
-              <SectionHeading
-                eyebrow="Meet Our Leadership"
-                title="Editorial Advisory Board"
-                centered={false}
-              />
-
-              <motion.div
-                initial={{ opacity: 0, x: 25 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-                whileHover={{ y: -3 }}
-              >
-                <Link
-                  to="/editorial-board"
-                  className="group inline-flex min-h-[43px] items-center gap-8 rounded-[6px] bg-[#003f3b] px-6 text-[12px] font-semibold text-white transition-all duration-300 hover:bg-[#c9953e]"
-                >
-                  View All Members
-                  <ArrowRight
-                    size={16}
-                    className="transition-transform duration-300 group-hover:translate-x-1"
-                  />
-                </Link>
-              </motion.div>
-            </div>
-
-            <motion.div
-              variants={staggerContainer}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true, amount: 0.15 }}
-              className="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5"
-            >
-              {TEAM.map((member) => (
-                <motion.article
-                  key={member.name}
-                  variants={fadeUp}
-                  whileHover={{ y: -8 }}
-                  transition={{ duration: 0.28 }}
-                  className="group overflow-hidden rounded-[10px] border border-[#e2e8e7] bg-white shadow-[0_7px_24px_rgba(7,54,50,0.06)] transition-shadow duration-300 hover:shadow-[0_20px_42px_rgba(7,54,50,0.14)]"
-                >
-                  <div className="h-[150px] overflow-hidden bg-[#f2f4f3]">
-                    <img
-                      src={member.image}
-                      alt={member.name}
-                      loading="lazy"
-                      className="h-full w-full object-cover object-top transition-transform duration-500 group-hover:scale-105"
-                    />
-                  </div>
-
-                  <div className="p-5">
-                    <h3 className="font-serif text-[15px] font-semibold text-[#103b38]">
-                      {member.name}
-                    </h3>
-
-                    <p className="mt-2 text-[12px] font-medium text-[#536563]">
-                      {member.role}
-                    </p>
-
-                    <p className="mt-3 text-[11px] leading-5 text-[#72807f]">
-                      {member.institution}
-                      <br />
-                      {member.country}
-                    </p>
-                  </div>
-                </motion.article>
-              ))}
-            </motion.div>
-
-            <div className="mt-8 flex justify-center gap-3">
-              {[0, 1, 2, 3].map((dot) => (
-                <button
-                  key={dot}
-                  type="button"
-                  aria-label={`Go to editorial board slide ${dot + 1}`}
-                  className={`h-[5px] rounded-full transition-all duration-300 ${
-                    dot === 0
-                      ? "w-7 bg-[#003f3b]"
-                      : "w-5 bg-[#cbd4d3] hover:bg-[#c9953e]"
-                  }`}
-                />
-              ))}
-            </div>
-          </div>
-        </section>
+       
 
         {/* =================================================
             CTA SECTION
         ================================================= */}
-        <section className="bg-white px-5 pb-12 sm:px-8 lg:px-16 xl:px-20">
+        <section className="bg-white px-5 sm:px-8 lg:px-16 xl:px-20 py-12">
           <motion.div
             variants={fadeUp}
             initial="hidden"
