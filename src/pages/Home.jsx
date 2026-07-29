@@ -1,798 +1,679 @@
-import { useEffect, useState } from "react";
-import { motion } from "framer-motion";
+import { useEffect, useMemo, useRef, useState } from "react";
+import { Helmet } from "react-helmet-async";
+import { Link } from "react-router-dom";
+import { AnimatePresence, motion, useInView } from "framer-motion";
 import {
-  BookOpen,
-  ShieldCheck,
-  Globe2,
-  Users,
-  FileCheck2,
-  Award,
   ArrowRight,
-  Quote,
+  Award,
+  BookOpen,
+  ChevronLeft,
+  ChevronRight,
+  FileText,
+  Globe2,
+  GraduationCap,
+  PenLine,
+  Search,
+  Users,
 } from "lucide-react";
-import Seo from "../components/Seo";
-import Hero from "../components/Hero";
-import SectionTitle from "../components/SectionTitle";
-import Card from "../components/Card";
-import JournalCard from "../components/JournalCard";
-import Button from "../components/Button";
-import AnimatedSection from "../components/AnimatedSection";
-import useCountUp from "../hooks/useCountUp";
-import { getJournals } from "../services/journalService";
-import { SITE_NAME, SITE_TAGLINE } from "../utils/constants";
+
+import heroBackground from "../assets/hero-bg.png";
+
+const BRAND = {
+  dark: "#073F40",
+  darker: "#053536",
+  gold: "#D4A257",
+  soft: "#F6F8F7",
+};
+
+const TOP_STATS = [
+  { icon: BookOpen, value: 25, suffix: "+", label: "Journals" },
+  { icon: FileText, value: 15000, suffix: "+", label: "Published Articles" },
+  { icon: Globe2, value: 120, suffix: "+", label: "Countries" },
+  { icon: Users, value: 10000, suffix: "+", label: "Active Authors" },
+  { icon: Award, value: 98, suffix: "%", label: "Author Satisfaction" },
+];
 
 const SERVICES = [
   {
     icon: BookOpen,
-    title: "Journal Publishing",
+    title: "Article Publication",
     description:
-      "End-to-end publishing support across Science, Medicine, Engineering, and Social Sciences.",
+      "Navigate the publication process with ease in Scopus, ESCI, and more.",
+    to: "/services/article-publication",
   },
   {
-    icon: ShieldCheck,
-    title: "Peer Review",
+    icon: FileText,
+    title: "Proofreading Services",
     description:
-      "Rigorous double-blind peer review conducted by subject-matter experts worldwide.",
+      "Elevate the quality of your manuscripts with expert proofreading and editing.",
+    to: "/services/proofreading",
   },
   {
-    icon: Globe2,
-    title: "Global Indexing",
+    icon: Users,
+    title: "Collaboration Services",
     description:
-      "Wider visibility through indexing partnerships and DOI assignment for every article.",
+      "Connect with leading experts to enhance your research impact and visibility.",
+    to: "/services/collaboration",
   },
   {
-    icon: FileCheck2,
-    title: "Manuscript Editing",
+    icon: PenLine,
+    title: "Paper Writing Assistance",
     description:
-      "Professional language and formatting support to meet international publishing standards.",
+      "Get professional support for well-structured and impactful research.",
+    to: "/services/paper-writing",
+  },
+  {
+    icon: GraduationCap,
+    title: "Thesis Writing Services",
+    description:
+      "Craft your thesis with expert guidance and academic precision.",
+    to: "/services/thesis-writing",
   },
 ];
 
-const STATS = [
-  { label: "Published Articles", value: 12500, suffix: "+" },
-  { label: "Active Journals", value: 48, suffix: "+" },
-  { label: "Countries Reached", value: 92, suffix: "+" },
-  { label: "Expert Reviewers", value: 3200, suffix: "+" },
-];
-
-const FEATURES = [
-  "Fast & transparent review process",
-  "Open access to global readership",
-  "Dedicated editorial support team",
-  "Plagiarism screening on every submission",
-];
-
-const FALLBACK_JOURNALS = [
+const JOURNALS = [
   {
-    id: "journal-of-applied-sciences",
-    title: "International Journal of Applied Sciences",
-    coverImage: "",
-    description:
-      "Covering multidisciplinary research in applied physics, chemistry, and materials science.",
-    category: "Science & Technology",
-    frequency: "Quarterly",
-    issn: "2456-1010",
+    id: 1,
+    title: "Genetics and Molecular Research",
+    issn: "1676-5680",
+    index: "Scopus Q4",
+    image: "/images/journals/genetics-and-molecular-research.jpg",
   },
   {
-    id: "journal-of-clinical-medicine",
-    title: "Journal of Clinical & Medical Research",
-    coverImage: "",
-    description:
-      "Peer-reviewed clinical studies, case reports, and public health research.",
-    category: "Medicine & Health",
-    frequency: "Monthly",
-    issn: "2456-2020",
+    id: 2,
+    title: "International Journal of Aquatic Research and Environmental Studies",
+    issn: "2980-7840",
+    index: "Scopus",
+    image: "/images/journals/aquatic-research.jpg",
   },
   {
-    id: "journal-of-social-sciences",
-    title: "Journal of Social Science & Humanities",
-    coverImage: "",
-    description:
-      "Exploring contemporary issues in sociology, psychology, and political science.",
-    category: "Social Sciences",
-    frequency: "Bi-Monthly",
-    issn: "2456-3030",
+    id: 3,
+    title: "International Journal of Special Education",
+    issn: "0827-3383",
+    index: "Scopus",
+    image: "/images/journals/special-education.jpg",
+  },
+  {
+    id: 4,
+    title: "Journal of Environmental Research",
+    issn: "1234-5678",
+    index: "Scopus Q3",
+    image: "/images/journals/environmental-research.jpg",
+  },
+  {
+    id: 5,
+    title: "Journal of Advanced Pharmaceutical Sciences",
+    issn: "2345-6789",
+    index: "Scopus Q4",
+    image: "/images/journals/pharmaceutical-sciences.jpg",
+  },
+  {
+    id: 6,
+    title: "Journal of Intelligent Decision Making and Information Science",
+    issn: "3079-0875",
+    index: "Scopus",
+    image: "/images/journals/intelligent-decision-making.jpg",
+  },
+  {
+    id: 7,
+    title:
+      "International Journal of Computer Information Systems and Industrial Management Applications",
+    issn: "2150-7988",
+    index: "Scopus",
+    image: "/images/journals/computer-information-systems.jpg",
+  },
+  {
+    id: 8,
+    title: "Journal of Health Science and Medical Research",
+    issn: "2586-9981",
+    index: "Scopus",
+    image: "/images/journals/health-science.jpg",
   },
 ];
 
-function StatCounter({ value, suffix, label }) {
-  const { ref, value: animated } = useCountUp(value);
+const BOTTOM_STATS = [
+  { icon: BookOpen, value: 25, suffix: "+", label: "Journals" },
+  { icon: FileText, value: 15000, suffix: "+", label: "Articles Published" },
+  { icon: Users, value: 10000, suffix: "+", label: "Active Authors" },
+  { icon: Users, value: 1200, suffix: "+", label: "Expert Reviewers" },
+  { icon: Globe2, value: 120, suffix: "+", label: "Countries Reached" },
+  { icon: Award, value: 98, suffix: "%", label: "Success Rate" },
+];
+
+const fadeUp = {
+  hidden: { opacity: 0, y: 28 },
+  show: { opacity: 1, y: 0 },
+};
+
+function CountUp({ end, duration = 1300 }) {
+  const ref = useRef(null);
+  const visible = useInView(ref, { once: true, amount: 0.55 });
+  const [value, setValue] = useState(0);
+
+  useEffect(() => {
+    if (!visible) return;
+
+    let frame;
+    const startedAt = performance.now();
+
+    const animate = (time) => {
+      const progress = Math.min((time - startedAt) / duration, 1);
+      const eased = 1 - Math.pow(1 - progress, 3);
+      setValue(Math.floor(end * eased));
+
+      if (progress < 1) frame = requestAnimationFrame(animate);
+    };
+
+    frame = requestAnimationFrame(animate);
+    return () => cancelAnimationFrame(frame);
+  }, [duration, end, visible]);
+
+  return <span ref={ref}>{value.toLocaleString()}</span>;
+}
+
+function ActionButton({
+  to,
+  children,
+  light = false,
+  className = "",
+  ariaLabel,
+}) {
   return (
-    <div ref={ref} className="text-center">
-      <p className="text-4xl sm:text-5xl font-heading font-bold text-white">
-        {animated.toLocaleString()}
-        {suffix}
-      </p>
-      <p className="text-white/60 mt-2 text-sm tracking-wide">{label}</p>
+    <Link
+      to={to}
+      aria-label={ariaLabel || String(children)}
+      className={[
+        "group inline-flex min-h-11 items-center justify-center gap-3 rounded-lg px-5 py-3",
+        "text-[12px] font-semibold transition-all duration-300",
+        "focus:outline-none focus-visible:ring-2 focus-visible:ring-[#D4A257] focus-visible:ring-offset-2",
+        light
+          ? "border border-slate-200 bg-white text-[#073F40] hover:border-[#073F40] hover:bg-[#F5F7F6]"
+          : "bg-[#073F40] text-white shadow-[0_10px_25px_rgba(7,63,64,.18)] hover:-translate-y-0.5 hover:bg-[#0A5152]",
+        className,
+      ].join(" ")}
+    >
+      {children}
+      <ArrowRight
+        size={14}
+        className="transition-transform duration-300 group-hover:translate-x-1"
+      />
+    </Link>
+  );
+}
+
+function StatItem({ item, dark = false, compact = false }) {
+  const Icon = item.icon;
+
+  return (
+    <div
+      className={[
+        "group flex items-center",
+        compact ? "gap-3" : "flex-col justify-center text-center",
+      ].join(" ")}
+    >
+      <span
+        className={[
+          "flex shrink-0 items-center justify-center rounded-full transition-transform duration-300 group-hover:-translate-y-1",
+          compact ? "h-11 w-11" : "mb-3 h-12 w-12",
+          dark
+            ? "bg-white/8 text-[#D4A257]"
+            : "bg-[#EEF1F0] text-[#073F40]",
+        ].join(" ")}
+      >
+        <Icon size={compact ? 19 : 21} strokeWidth={1.7} />
+      </span>
+
+      <span className={compact ? "" : "block"}>
+        <span
+          className={[
+            "block font-serif font-semibold leading-none",
+            compact ? "text-[21px]" : "text-[25px]",
+            dark ? "text-white" : "text-[#102E2F]",
+          ].join(" ")}
+        >
+          <CountUp end={item.value} />
+          {item.suffix}
+        </span>
+
+        <span
+          className={[
+            "mt-1.5 block whitespace-nowrap text-[10px]",
+            dark ? "text-white/72" : "text-slate-600",
+          ].join(" ")}
+        >
+          {item.label}
+        </span>
+      </span>
     </div>
   );
 }
 
-export default function Home() {
-  const [journals, setJournals] = useState(FALLBACK_JOURNALS);
-
-  useEffect(() => {
-    getJournals()
-      .then((data) => {
-        if (data.length) setJournals(data.slice(0, 3));
-      })
-      .catch(() => {});
-  }, []);
+function ServiceCard({ item, index }) {
+  const Icon = item.icon;
 
   return (
-    <>
-      <Seo
-        title="Home"
-        description="Pure Publication is a trusted platform for peer-reviewed journal publishing, manuscript submission, and academic research support."
-        keywords="journal publication, peer review, research papers, academic publishing"
-        path="/"
-        jsonLd={{
-          "@context": "https://schema.org",
-          "@type": "Organization",
-          name: SITE_NAME,
-          description: SITE_TAGLINE,
-        }}
-      />
+    <motion.article
+      variants={fadeUp}
+      initial="hidden"
+      whileInView="show"
+      viewport={{ once: true, amount: 0.18 }}
+      transition={{ duration: 0.52, delay: index * 0.07 }}
+      whileHover={{ y: -8 }}
+      className="group flex min-h-[238px] flex-col rounded-[10px] border border-slate-200/90 bg-white p-5 shadow-[0_8px_30px_rgba(7,63,64,.055)] transition-shadow duration-300 hover:shadow-[0_18px_45px_rgba(7,63,64,.12)]"
+    >
+      <span className="flex h-11 w-11 items-center justify-center rounded-full bg-[#EEF1F0] text-[#073F40] transition-all duration-300 group-hover:rotate-3 group-hover:bg-[#073F40] group-hover:text-[#D4A257]">
+        <Icon size={20} strokeWidth={1.7} />
+      </span>
 
-      <Hero
-        eyebrow="Peer-Reviewed • Open Access • Global"
-        title="Advancing Research,"
-        highlight="Empowering Knowledge"
-        description="Pure Publication connects researchers, academicians, and institutions through a fast, transparent, and globally recognized journal publishing platform."
-        image="https://images.unsplash.com/photo-1521587760476-6c12a4b040da?q=80&w=1200&auto=format&fit=crop"
-        primaryAction={{ label: "Submit Your Paper", to: "/submit-paper" }}
-        secondaryAction={{ label: "Explore Journals", to: "/journals" }}
-        stats={[
-          { value: "12.5K+", label: "Articles Published" },
-          { value: "48+", label: "Active Journals" },
-          { value: "92+", label: "Countries" },
-        ]}
-      />
+      <h3 className="mt-5 font-serif text-[15px] font-semibold leading-5 text-[#153D3E]">
+        {item.title}
+      </h3>
 
-      {/* SERVICES */}
-      <section className="py-24">
-        <div className="container-custom">
-          <SectionTitle
-            badge="What We Offer"
-            title="Our Publishing"
-            highlight="Services"
-            description="From manuscript submission to global indexing, we support every stage of the research publishing journey."
-          />
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {SERVICES.map((service, i) => (
-              <Card key={service.title} {...service} delay={i * 0.1} />
-            ))}
-          </div>
-        </div>
-      </section>
+      <p className="mt-3 flex-1 text-[11px] leading-[1.75] text-slate-600">
+        {item.description}
+      </p>
 
-      {/* STATS BAND */}
-      <section className="py-20 bg-hero-gradient relative overflow-hidden">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_20%,rgba(247,148,30,0.12),transparent_50%)]" />
-        <div className="container-custom grid grid-cols-2 lg:grid-cols-4 gap-10 relative">
-          {STATS.map((stat) => (
-            <StatCounter key={stat.label} {...stat} />
-          ))}
-        </div>
-      </section>
-
-      {/* LATEST JOURNALS */}
-      <section className="py-24">
-        <div className="container-custom">
-          <SectionTitle
-            badge="Featured"
-            title="Latest"
-            highlight="Journals"
-            description="Explore our actively publishing, peer-reviewed journals across diverse research disciplines."
-          />
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
-            {journals.map((journal, i) => (
-              <JournalCard key={journal.id} journal={journal} delay={i * 0.1} />
-            ))}
-          </div>
-          <AnimatedSection className="text-center mt-12">
-            <Button to="/journals" variant="outlineDark" showArrow>
-              View All Journals
-            </Button>
-          </AnimatedSection>
-        </div>
-      </section>
-
-      {/* FEATURES / WHY CHOOSE US */}
-      <section className="py-24 bg-navy-50">
-        <div className="container-custom grid lg:grid-cols-2 gap-16 items-center">
-          <AnimatedSection direction="left">
-            <img
-              src="https://images.unsplash.com/photo-1524995997946-a1c2e315a42f?q=80&w=1100&auto=format&fit=crop"
-              alt="Researchers collaborating"
-              className="rounded-3xl shadow-card-hover w-full object-cover aspect-[4/3] transition-transform duration-700 hover:scale-105"
-            />
-          </AnimatedSection>
-          <AnimatedSection direction="right">
-            <span className="section-badge">Why Choose Us</span>
-            <h2 className="text-3xl sm:text-4xl font-heading font-bold text-navy-900 mb-6">
-              Built for Researchers Who Value{" "}
-              <span className="text-amber-500">Integrity & Speed</span>
-            </h2>
-            <ul className="space-y-4 mb-8">
-              {FEATURES.map((feature) => (
-                <li key={feature} className="flex items-start gap-3">
-                  <span className="mt-1 w-6 h-6 rounded-full bg-amber-100 text-amber-600 flex items-center justify-center shrink-0">
-                    <Award size={14} />
-                  </span>
-                  <span className="text-navy-600">{feature}</span>
-                </li>
-              ))}
-            </ul>
-            <Button to="/about" variant="ghost" showArrow>
-              Learn More About Us
-            </Button>
-          </AnimatedSection>
-        </div>
-      </section>
-
-      {/* TESTIMONIAL / QUOTE STRIP */}
-      <section className="py-20">
-        <div className="container-custom">
-          <AnimatedSection direction="scale" className="bg-navy-900 rounded-3xl p-10 lg:p-16 text-center relative overflow-hidden">
-            <Quote className="mx-auto text-amber-400 mb-6" size={40} />
-            <p className="text-white text-xl lg:text-2xl font-heading leading-relaxed max-w-3xl mx-auto mb-6">
-              "Pure Publication made the entire review and publishing process
-              seamless — transparent timelines and genuinely helpful editorial
-              support."
-            </p>
-            <div className="flex items-center justify-center gap-3">
-              <Users className="text-amber-400" size={20} />
-              <span className="text-white/70 text-sm">
-                Dr. Ananya Rao, Senior Researcher
-              </span>
-            </div>
-          </AnimatedSection>
-        </div>
-      </section>
-
-      {/* CTA */}
-      <section className="pb-24">
-        <div className="container-custom">
-          <AnimatedSection className="bg-cta-gradient rounded-3xl p-10 lg:p-16 flex flex-col lg:flex-row items-center justify-between gap-8">
-            <div>
-              <h3 className="text-2xl lg:text-3xl font-heading font-bold text-navy-900 mb-2">
-                Ready to publish your research?
-              </h3>
-              <p className="text-navy-800/80">
-                Submit your manuscript today and join thousands of published
-                researchers worldwide.
-              </p>
-            </div>
-            <Button
-              to="/submit-paper"
-              variant="outlineDark"
-              className="bg-navy-900 !text-white border-navy-900 hover:bg-navy-800 whitespace-nowrap"
-            >
-              Submit Paper <ArrowRight size={18} />
-            </Button>
-          </AnimatedSection>
-        </div>
-      </section>
-    </>
+      <Link
+        to={item.to}
+        className="mt-4 inline-flex items-center gap-2 text-[11px] font-semibold text-[#073F40]"
+      >
+        Learn More
+        <ArrowRight
+          size={13}
+          className="transition-transform duration-300 group-hover:translate-x-1.5"
+        />
+      </Link>
+    </motion.article>
   );
 }
 
-// import { useEffect, useState } from "react";
-// import { motion } from "framer-motion";
-// import {
-//   ArrowRight,
-//   BookOpen,
-//   FileText,
-//   Globe2,
-//   Users,
-//   Award,
-//   Search,
-//   GraduationCap,
-//   PenLine,
-//   ChevronLeft,
-//   ChevronRight,
-//   Send,
-// } from "lucide-react";
+function JournalCard({ journal }) {
+  const [failed, setFailed] = useState(false);
 
-// import Seo from "../components/Seo";
-// import Button from "../components/Button";
-// import AnimatedSection from "../components/AnimatedSection";
-// import useCountUp from "../hooks/useCountUp";
-// import { getJournals } from "../services/journalService";
-// import { SITE_NAME, SITE_TAGLINE } from "../utils/constants";
-// import heroBackground from "../assets/hero-bg.png";
+  return (
+    <motion.article
+      layout
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      whileHover={{ y: -6 }}
+      className="group min-w-0"
+    >
+      <Link to={`/journals/${journal.id}`} className="block">
+        <div className="aspect-[.72/1] overflow-hidden rounded-[3px] bg-gradient-to-br from-[#0A4A4B] to-[#D4A257] shadow-[0_10px_25px_rgba(7,63,64,.12)]">
+          {!failed ? (
+            <img
+              src={journal.image}
+              alt={`${journal.title} journal cover`}
+              loading="lazy"
+              onError={() => setFailed(true)}
+              className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.045]"
+            />
+          ) : (
+            <div className="flex h-full flex-col justify-between p-5 text-white">
+              <span className="text-[10px] uppercase tracking-[.25em] text-white/70">
+                Pure Publications
+              </span>
+              <h3 className="font-serif text-xl leading-tight">{journal.title}</h3>
+              <span className="text-[10px]">ISSN {journal.issn}</span>
+            </div>
+          )}
+        </div>
 
-// const SERVICES = [
-//   {
-//     icon: FileText,
-//     title: "Article Publication",
-//     description:
-//       "Navigate the publication process with ease in Scopus, ESCI, and more.",
-//   },
-//   {
-//     icon: FileText,
-//     title: "Proofreading Services",
-//     description:
-//       "Elevate the quality of your manuscripts with expert proofreading and editing.",
-//   },
-//   {
-//     icon: Users,
-//     title: "Collaboration Services",
-//     description:
-//       "Connect with leading experts to enhance your research impact and visibility.",
-//   },
-//   {
-//     icon: PenLine,
-//     title: "Paper Writing Assistance",
-//     description:
-//       "Get professional support for well-structured and impactful research.",
-//   },
-//   {
-//     icon: GraduationCap,
-//     title: "Thesis Writing Services",
-//     description:
-//       "Craft your thesis with expert guidance and academic precision.",
-//   },
-// ];
+        <h3 className="mt-3 min-h-[38px] line-clamp-2 text-[11px] font-semibold leading-[1.55] text-[#153D3E]">
+          {journal.title}
+        </h3>
 
-// const STATS = [
-//   {
-//     icon: BookOpen,
-//     value: 25,
-//     suffix: "+",
-//     label: "Journals",
-//   },
-//   {
-//     icon: FileText,
-//     value: 15000,
-//     suffix: "+",
-//     label: "Published Articles",
-//   },
-//   {
-//     icon: Globe2,
-//     value: 120,
-//     suffix: "+",
-//     label: "Countries",
-//   },
-//   {
-//     icon: Users,
-//     value: 10000,
-//     suffix: "+",
-//     label: "Active Authors",
-//   },
-//   {
-//     icon: Award,
-//     value: 98,
-//     suffix: "%",
-//     label: "Author Satisfaction",
-//   },
-// ];
+        <p className="mt-1 text-[9px] text-slate-500">ISSN: {journal.issn}</p>
 
-// const BOTTOM_STATS = [
-//   {
-//     icon: BookOpen,
-//     value: 25,
-//     suffix: "+",
-//     label: "Journals",
-//   },
-//   {
-//     icon: FileText,
-//     value: 15000,
-//     suffix: "+",
-//     label: "Articles Published",
-//   },
-//   {
-//     icon: Users,
-//     value: 10000,
-//     suffix: "+",
-//     label: "Active Authors",
-//   },
-//   {
-//     icon: Users,
-//     value: 1200,
-//     suffix: "+",
-//     label: "Expert Reviewers",
-//   },
-//   {
-//     icon: Globe2,
-//     value: 120,
-//     suffix: "+",
-//     label: "Countries Reached",
-//   },
-//   {
-//     icon: Award,
-//     value: 98,
-//     suffix: "%",
-//     label: "Success Rate",
-//   },
-// ];
+        <span className="mt-2 inline-flex rounded-full bg-[#F0F2F1] px-2.5 py-1 text-[8px] text-slate-600">
+          {journal.index}
+        </span>
+      </Link>
+    </motion.article>
+  );
+}
 
-// const FALLBACK_JOURNALS = [
-//   {
-//     id: "genetics-molecular-research",
-//     title: "Genetics and Molecular Research",
-//     coverImage: "/images/journals/genetics.jpg",
-//     issn: "1676-5680",
-//     index: "Scopus Q4",
-//   },
-//   {
-//     id: "aquatic-research",
-//     title:
-//       "International Journal of Aquatic Research and Environmental Studies",
-//     coverImage: "/images/journals/aquatic.jpg",
-//     issn: "2289-7840",
-//     index: "Scopus",
-//   },
-//   {
-//     id: "special-education",
-//     title: "International Journal of Special Education",
-//     coverImage: "/images/journals/special-education.jpg",
-//     issn: "0887-3338",
-//     index: "Scopus",
-//   },
-//   {
-//     id: "environmental-research",
-//     title: "Journal of Environmental Research",
-//     coverImage: "/images/journals/environmental.jpg",
-//     issn: "1234-5678",
-//     index: "Scopus Q3",
-//   },
-//   {
-//     id: "pharmaceutical-sciences",
-//     title: "Journal of Advanced Pharmaceutical Sciences",
-//     coverImage: "/images/journals/pharma.jpg",
-//     issn: "2345-6789",
-//     index: "Scopus Q4",
-//   },
-// ];
+export default function Home() {
+  const [page, setPage] = useState(0);
 
-// function AnimatedStat({ stat, dark = false }) {
-//   const { ref, value } = useCountUp(stat.value);
+  const visibleCount = 5;
+  const maxPage = Math.max(0, Math.ceil(JOURNALS.length / visibleCount) - 1);
 
-//   const Icon = stat.icon;
+  const visibleJournals = useMemo(() => {
+    const start = page * visibleCount;
+    return JOURNALS.slice(start, start + visibleCount);
+  }, [page]);
 
-//   return (
-//     <div
-//       ref={ref}
-//       className={`flex flex-col items-center text-center ${
-//         dark ? "text-white" : "text-slate-900"
-//       }`}
-//     >
-//       <div
-//         className={`mb-3 flex h-12 w-12 items-center justify-center rounded-full ${
-//           dark ? "bg-white/10 text-[#d7a652]" : "bg-[#eef1f0] text-[#063f40]"
-//         }`}
-//       >
-//         <Icon size={23} strokeWidth={1.8} />
-//       </div>
+  const previous = () => setPage((current) => (current <= 0 ? maxPage : current - 1));
+  const next = () => setPage((current) => (current >= maxPage ? 0 : current + 1));
 
-//       <div className="font-heading text-2xl font-semibold sm:text-3xl">
-//         {value.toLocaleString()}
-//         {stat.suffix}
-//       </div>
+  useEffect(() => {
+    const id = window.setInterval(next, 6000);
+    return () => window.clearInterval(id);
+  }, [maxPage]);
 
-//       <div
-//         className={`mt-1 text-xs sm:text-sm ${
-//           dark ? "text-white/70" : "text-slate-600"
-//         }`}
-//       >
-//         {stat.label}
-//       </div>
-//     </div>
-//   );
-// }
+  const structuredData = {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    name: "Pure Publications",
+    url: "https://purepublications.org/",
+    description:
+      "Academic publication, proofreading, collaboration, paper writing and thesis writing services.",
+    sameAs: [],
+  };
 
-// function ServiceCard({ service, index }) {
-//   const Icon = service.icon;
+  return (
+    <>
+      <Helmet>
+        <title>Pure Publications | Academic Research & Journal Publishing</title>
+        <meta
+          name="description"
+          content="Pure Publications supports researchers with journal publication, proofreading, collaboration, paper writing, thesis writing, and global academic visibility."
+        />
+        <meta
+          name="keywords"
+          content="Pure Publications, academic publishing, journal publication, Scopus journals, paper publication, research writing, proofreading, thesis writing"
+        />
+        <meta name="robots" content="index, follow" />
+        <link rel="canonical" href="https://purepublications.org/" />
 
-//   return (
-//     <motion.div
-//       initial={{ opacity: 0, y: 30 }}
-//       whileInView={{ opacity: 1, y: 0 }}
-//       viewport={{ once: true, amount: 0.15 }}
-//       transition={{ duration: 0.5, delay: index * 0.08 }}
-//       whileHover={{
-//         y: -8,
-//         transition: { duration: 0.25 },
-//       }}
-//       className="group rounded-xl border border-slate-200 bg-white p-6 shadow-[0_5px_25px_rgba(5,45,46,0.06)] transition-shadow duration-300 hover:shadow-[0_15px_40px_rgba(5,45,46,0.12)]"
-//     >
-//       <div className="mb-6 flex h-12 w-12 items-center justify-center rounded-full bg-[#eef1f0] text-[#063f40] transition-all duration-300 group-hover:bg-[#063f40] group-hover:text-[#d7a652]">
-//         <Icon size={23} />
-//       </div>
+        <meta property="og:type" content="website" />
+        <meta
+          property="og:title"
+          content="Pure Publications | Where Your Research Meets Recognition"
+        />
+        <meta
+          property="og:description"
+          content="Your dedicated partner in academic excellence and professional writing."
+        />
+        <meta property="og:url" content="https://purepublications.org/" />
+        <meta property="og:image" content="https://purepublications.org/og-home.jpg" />
 
-//       <h3 className="font-heading text-lg font-semibold text-[#073e40]">
-//         {service.title}
-//       </h3>
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta
+          name="twitter:title"
+          content="Pure Publications | Where Your Research Meets Recognition"
+        />
+        <meta
+          name="twitter:description"
+          content="Academic publication and professional research support services."
+        />
+        <meta name="twitter:image" content="https://purepublications.org/og-home.jpg" />
 
-//       <p className="mt-4 min-h-[78px] text-sm leading-6 text-slate-600">
-//         {service.description}
-//       </p>
+        <script type="application/ld+json">
+          {JSON.stringify(structuredData)}
+        </script>
+      </Helmet>
 
-//       <button className="mt-5 flex items-center gap-2 text-sm font-semibold text-[#073e40] transition-all group-hover:gap-4">
-//         Learn More
-//         <ArrowRight size={16} />
-//       </button>
-//     </motion.div>
-//   );
-// }
+      <main className="overflow-hidden bg-white text-slate-800">
+        {/* HERO */}
+        <section className="relative bg-[linear-gradient(90deg,#fff_0%,#fff_48%,#F7F7F5_100%)]">
+          <div className="mx-auto grid min-h-[430px] max-w-[1180px] items-center gap-7 px-5 pb-16 pt-12 sm:px-8 lg:grid-cols-[44%_56%] lg:px-10 lg:pb-20 lg:pt-10">
+            <motion.div
+              initial={{ opacity: 0, x: -38 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.75, ease: "easeOut" }}
+              className="relative z-10 max-w-[440px]"
+            >
+              <h1 className="font-serif text-[42px] font-medium leading-[.98] tracking-[-.035em] text-[#123839] sm:text-[54px] lg:text-[58px]">
+                Where Your
+                <br />
+                Research Meets
+                <br />
+                <span className="text-[#D4A257]">Recognition</span>
+              </h1>
 
-// function JournalItem({ journal, index }) {
-//   return (
-//     <motion.article
-//       initial={{ opacity: 0, y: 25 }}
-//       whileInView={{ opacity: 1, y: 0 }}
-//       viewport={{ once: true }}
-//       transition={{ duration: 0.5, delay: index * 0.08 }}
-//       whileHover={{ y: -5 }}
-//       className="min-w-[190px] flex-1"
-//     >
-//       <div className="overflow-hidden rounded-sm bg-slate-100">
-//         <img
-//           src={journal.coverImage}
-//           alt={journal.title}
-//           className="aspect-[3/4] w-full object-cover transition-transform duration-500 hover:scale-105"
-//         />
-//       </div>
+              <p className="mt-5 max-w-[360px] text-[12px] leading-5 text-slate-600 sm:text-[13px]">
+                Your dedicated partner in academic excellence
+                <br className="hidden sm:block" /> and professional writing.
+              </p>
 
-//       <h3 className="mt-4 line-clamp-3 text-sm font-semibold leading-5 text-[#073e40]">
-//         {journal.title}
-//       </h3>
+              <div className="mt-6 flex flex-wrap gap-4">
+                <ActionButton to="/services">Explore Services</ActionButton>
+                <ActionButton to="/submit-paper" light>
+                  Submit Your Paper
+                </ActionButton>
+              </div>
+            </motion.div>
 
-//       <p className="mt-3 text-xs text-slate-500">ISSN: {journal.issn}</p>
+            <motion.div
+              initial={{ opacity: 0, x: 38, scale: 0.98 }}
+              animate={{ opacity: 1, x: 0, scale: 1 }}
+              transition={{ duration: 0.85, ease: "easeOut" }}
+              className="relative h-[300px] overflow-hidden rounded-tl-[62px] rounded-br-[58px] sm:h-[390px] lg:h-[430px]"
+            >
+              <img
+                src={heroBackground}
+                alt="Academic books, research laptop and scholarly publishing icons"
+                fetchPriority="high"
+                className="h-full w-full object-cover"
+              />
+              <div className="pointer-events-none absolute inset-0 bg-gradient-to-r from-black/5 via-transparent to-black/10" />
+            </motion.div>
+          </div>
 
-//       <span className="mt-3 inline-flex rounded-full bg-slate-100 px-3 py-1 text-[11px] text-slate-600">
-//         {journal.index}
-//       </span>
-//     </motion.article>
-//   );
-// }
+          {/* FLOATING TOP STATS */}
+          <div className="relative z-20 mx-auto -mt-12 max-w-[1010px] px-5 sm:px-8">
+            <motion.div
+              initial={{ opacity: 0, y: 24 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.35, duration: 0.6 }}
+              className="grid grid-cols-2 gap-x-4 gap-y-6 rounded-[12px] border border-slate-200 bg-white px-5 py-5 shadow-[0_15px_40px_rgba(7,63,64,.12)] sm:grid-cols-3 lg:grid-cols-5 lg:px-8"
+            >
+              {TOP_STATS.map((item) => (
+                <StatItem key={item.label} item={item} compact />
+              ))}
+            </motion.div>
+          </div>
+        </section>
 
-// export default function Home() {
-//   const [journals, setJournals] = useState(FALLBACK_JOURNALS);
+        {/* INDEXING */}
+        <section className="mx-auto max-w-[1080px] px-5 pt-5 sm:px-8">
+          <motion.div
+            variants={fadeUp}
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true, amount: 0.35 }}
+            transition={{ duration: 0.55 }}
+            className="flex flex-wrap items-center justify-center gap-x-7 gap-y-4 rounded-[11px] bg-[#073F40] px-5 py-4 text-white shadow-[0_12px_28px_rgba(7,63,64,.18)] lg:justify-between"
+          >
+            <span className="text-[10px] font-semibold text-[#D4A257]">
+              Trusted & Indexed By
+            </span>
 
-//   useEffect(() => {
-//     getJournals()
-//       .then((data) => {
-//         if (data?.length) {
-//           setJournals(data.slice(0, 5));
-//         }
-//       })
-//       .catch(() => {});
-//   }, []);
+            <span className="inline-flex items-center gap-2 text-[13px] font-semibold">
+              <span className="h-0 w-0 border-b-[7px] border-l-[12px] border-t-[7px] border-b-transparent border-l-[#F2B84B] border-t-transparent" />
+              Crossref
+            </span>
 
-//   return (
-//     <>
-//       <Seo
-//         title="Home"
-//         description="Pure Publications is your dedicated partner in academic excellence and professional writing."
-//         keywords="academic publishing, journals, research papers, publication"
-//         path="/"
-//         jsonLd={{
-//           "@context": "https://schema.org",
-//           "@type": "Organization",
-//           name: SITE_NAME,
-//           description: SITE_TAGLINE,
-//         }}
-//       />
+            <span className="flex h-8 w-8 items-center justify-center rounded-full bg-white text-[11px] font-bold text-[#073F40]">
+              DOI
+            </span>
 
-//     {/* HERO */}
-// <section className="relative overflow-hidden bg-white">
-//   <div className="mx-auto flex min-h-[650px] max-w-[1280px] items-center px-6 pt-[110px] pb-14 lg:grid lg:grid-cols-[48%_52%] lg:gap-6">
+            <span className="text-center leading-3">
+              <b className="block text-[13px]">Google</b>
+              <span className="text-[8px]">Scholar</span>
+            </span>
 
-//     {/* LEFT CONTENT */}
-//     <motion.div
-//       initial={{ opacity: 0, x: -40 }}
-//       animate={{ opacity: 1, x: 0 }}
-//       transition={{ duration: 0.7 }}
-//       className="z-10 max-w-[520px]"
-//     >
-//       <h1 className="font-heading text-[42px] font-medium leading-[1.08] text-[#073e40] sm:text-[52px] lg:text-[64px]">
-//         Where Your
-//         <br />
-//         Research Meets
-//         <br />
-//         <span className="text-[#d2a052]">Recognition</span>
-//       </h1>
+            <span className="text-center text-[9px] font-semibold leading-3">
+              OPEN
+              <br />
+              ACCESS
+            </span>
 
-//       <p className="mt-7 max-w-[430px] text-[18px] leading-8 text-slate-600">
-//         Your dedicated partner in academic excellence
-//         and professional writing.
-//       </p>
+            <span className="text-[17px] font-medium tracking-tight">ORCID</span>
+            <span className="text-[16px]">Scopus</span>
+            <span className="text-[15px] font-bold">ISI</span>
 
-//       <div className="mt-9 flex flex-wrap gap-5">
+            <Link
+              to="/indexing"
+              aria-label="View indexing information"
+              className="flex h-9 w-9 items-center justify-center rounded-full border border-[#D4A257] text-[#D4A257] transition-all hover:rotate-[-8deg] hover:bg-[#D4A257] hover:text-[#073F40]"
+            >
+              <ArrowRight size={15} />
+            </Link>
+          </motion.div>
+        </section>
 
-//         <Button
-//           to="/services"
-//           showArrow
-//           className="h-[56px] rounded-xl bg-[#073e40] px-8 text-white hover:bg-[#0b5355]"
-//         >
-//           Explore Services
-//         </Button>
+        {/* SERVICES */}
+        <section className="mx-auto max-w-[1080px] px-5 py-11 sm:px-8 lg:py-14">
+          <div className="mb-7 flex flex-col justify-between gap-4 sm:flex-row sm:items-end">
+            <div>
+              <span className="text-[9px] font-semibold uppercase tracking-wide text-[#D4A257]">
+                Our Services
+              </span>
+              <h2 className="mt-2 font-serif text-[25px] font-semibold text-[#153D3E]">
+                Elevate Your Academic Success
+              </h2>
+              <p className="mt-2 max-w-[420px] text-[10px] leading-[1.65] text-slate-600">
+                Comprehensive services designed to support your research journey
+                from idea to publication.
+              </p>
+            </div>
 
-//         <Button
-//           to="/submit-paper"
-//           variant="outlineDark"
-//           showArrow
-//           className="h-[56px] rounded-xl border-2 border-[#d9d9d9] px-8"
-//         >
-//           Submit Your Paper
-//         </Button>
+            <ActionButton
+              to="/services"
+              className="self-start px-6 sm:self-auto"
+            >
+              View All Services
+            </ActionButton>
+          </div>
 
-//       </div>
-//     </motion.div>
+          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-5">
+            {SERVICES.map((item, index) => (
+              <ServiceCard key={item.title} item={item} index={index} />
+            ))}
+          </div>
+        </section>
 
-//     {/* RIGHT IMAGE */}
-//     <motion.div
-//       initial={{ opacity: 0, x: 40 }}
-//       animate={{ opacity: 1, x: 0 }}
-//       transition={{ duration: 0.8 }}
-//       className="relative hidden justify-end lg:flex"
-//     >
-//       <img
-//         src={heroBackground}
-//         alt="Research"
-//         className="w-full max-w-[760px] rounded-l-[70px] rounded-br-[70px] object-contain"
-//         draggable={false}
-//       />
-//     </motion.div>
+        {/* JOURNALS */}
+        <section className="mx-auto max-w-[1080px] px-5 pb-10 sm:px-8">
+          <div className="mb-6 flex items-end justify-between gap-4">
+            <div>
+              <h2 className="font-serif text-[22px] font-semibold text-[#153D3E]">
+                Latest Additions
+              </h2>
+              <p className="mt-1.5 text-[9px] text-slate-600">
+                Discover the newest entries in our Latest Additions section!
+              </p>
+            </div>
 
-//   </div>
+            <Link
+              to="/journals"
+              className="group hidden items-center gap-2 text-[10px] font-semibold text-[#073F40] sm:flex"
+            >
+              View all journals
+              <ArrowRight
+                size={13}
+                className="transition-transform group-hover:translate-x-1"
+              />
+            </Link>
+          </div>
 
-// </section>
+          <div className="relative">
+            <button
+              type="button"
+              onClick={previous}
+              aria-label="Previous journals"
+              className="absolute -left-4 top-[40%] z-20 hidden h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full border border-slate-200 bg-white text-[#073F40] shadow-md transition hover:scale-105 hover:bg-[#073F40] hover:text-white lg:flex"
+            >
+              <ChevronLeft size={18} />
+            </button>
 
-//       {/* INDEXING STRIP */}
-//       <section className="container-custom py-8">
-//         <motion.div
-//           initial={{ opacity: 0, scale: 0.98 }}
-//           whileInView={{ opacity: 1, scale: 1 }}
-//           viewport={{ once: true }}
-//           className="flex flex-wrap items-center justify-center gap-7 rounded-2xl bg-[#063f40] px-6 py-6 text-white lg:justify-between"
-//         >
-//           <span className="text-sm font-semibold text-[#d7a652]">
-//             Trusted & Indexed By
-//           </span>
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={page}
+                initial={{ opacity: 0, x: 26 }}
+                animate={{ opacity: 1, x: 0 }}
+                exit={{ opacity: 0, x: -26 }}
+                transition={{ duration: 0.35 }}
+                className="grid grid-cols-2 gap-5 sm:grid-cols-3 lg:grid-cols-5"
+              >
+                {visibleJournals.map((journal) => (
+                  <JournalCard key={journal.id} journal={journal} />
+                ))}
+              </motion.div>
+            </AnimatePresence>
 
-//           <span className="text-xl font-semibold">Crossref</span>
-//           <span className="rounded-full bg-white px-3 py-1 text-sm font-bold text-[#073e40]">
-//             DOI
-//           </span>
-//           <span className="text-xl font-medium">Google Scholar</span>
-//           <span className="text-sm">OPEN ACCESS</span>
-//           <span className="text-xl">ORCID</span>
-//           <span className="text-xl">Scopus</span>
-//           <span className="text-lg font-bold">ISI</span>
+            <button
+              type="button"
+              onClick={next}
+              aria-label="Next journals"
+              className="absolute -right-4 top-[40%] z-20 hidden h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full border border-slate-200 bg-white text-[#073F40] shadow-md transition hover:scale-105 hover:bg-[#073F40] hover:text-white lg:flex"
+            >
+              <ChevronRight size={18} />
+            </button>
+          </div>
 
-//           <button className="flex h-10 w-10 items-center justify-center rounded-full border border-[#d7a652] text-[#d7a652] transition hover:bg-[#d7a652] hover:text-[#073e40]">
-//             <ArrowRight size={18} />
-//           </button>
-//         </motion.div>
-//       </section>
+          <div className="mt-5 flex justify-center gap-2">
+            {Array.from({ length: maxPage + 1 }).map((_, index) => (
+              <button
+                key={index}
+                type="button"
+                onClick={() => setPage(index)}
+                aria-label={`Show journal group ${index + 1}`}
+                className={[
+                  "h-1.5 rounded-full transition-all duration-300",
+                  page === index
+                    ? "w-7 bg-[#073F40]"
+                    : "w-4 bg-slate-300 hover:bg-slate-400",
+                ].join(" ")}
+              />
+            ))}
+          </div>
+        </section>
 
-//       {/* SERVICES */}
-//       <section className="container-custom py-14 lg:py-20">
-//         <div className="mb-10 flex flex-col justify-between gap-6 md:flex-row md:items-end">
-//           <div>
-//             <span className="text-sm font-semibold uppercase tracking-wide text-[#d2a052]">
-//               Our Services
-//             </span>
+        {/* DARK STATS */}
+        <section className="mx-auto max-w-[1100px] px-5 pb-3 sm:px-8">
+          <motion.div
+            variants={fadeUp}
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true, amount: 0.25 }}
+            transition={{ duration: 0.55 }}
+            className="grid grid-cols-2 gap-7 rounded-[16px] bg-[#073F40] px-5 py-6 shadow-[0_16px_35px_rgba(7,63,64,.18)] sm:grid-cols-3 lg:grid-cols-6"
+          >
+            {BOTTOM_STATS.map((item) => (
+              <StatItem key={item.label} item={item} dark />
+            ))}
+          </motion.div>
+        </section>
 
-//             <h2 className="mt-2 font-heading text-3xl font-semibold text-[#073e40] sm:text-4xl">
-//               Elevate Your Academic Success
-//             </h2>
+        {/* CTA */}
+        <section className="mx-auto max-w-[1100px] px-5 pb-14 sm:px-8">
+          <motion.div
+            variants={fadeUp}
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true, amount: 0.3 }}
+            transition={{ duration: 0.55 }}
+            className="relative overflow-hidden rounded-[16px] bg-[#0B494A] px-6 py-5 shadow-[0_14px_35px_rgba(7,63,64,.18)] sm:px-9"
+          >
+            <div className="absolute inset-y-0 right-0 hidden w-[41%] bg-[url('/images/cta-open-book.jpg')] bg-cover bg-center opacity-75 md:block" />
+            <div className="absolute inset-y-0 right-[35%] hidden w-24 bg-gradient-to-r from-[#0B494A] to-transparent md:block" />
 
-//             <p className="mt-3 max-w-xl text-sm leading-6 text-slate-600">
-//               Comprehensive services designed to support your research journey
-//               from idea to publication.
-//             </p>
-//           </div>
+            <div className="relative z-10 grid items-center gap-6 md:grid-cols-[1.05fr_1.2fr_.85fr]">
+              <h2 className="font-serif text-[24px] font-medium leading-[1.1] text-white">
+                Ready to Publish
+                <br />
+                Your Research?
+              </h2>
 
-//           <Button to="/services" variant="primary" showArrow>
-//             View All Services
-//           </Button>
-//         </div>
+              <p className="border-l border-white/25 pl-6 text-[10px] leading-[1.65] text-white/78">
+                Join thousands of researchers who trust Pure Publications for
+                their academic journey.
+              </p>
 
-//         <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-5">
-//           {SERVICES.map((service, index) => (
-//             <ServiceCard key={service.title} service={service} index={index} />
-//           ))}
-//         </div>
-//       </section>
-
-//       {/* JOURNALS */}
-//       <section className="container-custom py-10 lg:py-16">
-//         <div className="mb-8 flex items-end justify-between">
-//           <div>
-//             <h2 className="font-heading text-3xl font-semibold text-[#073e40]">
-//               Latest Additions
-//             </h2>
-
-//             <p className="mt-2 text-sm text-slate-600">
-//               Discover the newest entries in our Latest Additions section!
-//             </p>
-//           </div>
-
-//           <Button
-//             to="/journals"
-//             variant="ghost"
-//             showArrow
-//             className="hidden sm:flex"
-//           >
-//             View all journals
-//           </Button>
-//         </div>
-
-//         <div className="relative">
-//           <button className="absolute -left-5 top-1/2 z-10 hidden h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full bg-white shadow-md lg:flex">
-//             <ChevronLeft size={20} />
-//           </button>
-
-//           <div className="grid grid-cols-2 gap-6 sm:grid-cols-3 lg:grid-cols-5">
-//             {journals.slice(0, 5).map((journal, index) => (
-//               <JournalItem key={journal.id} journal={journal} index={index} />
-//             ))}
-//           </div>
-
-//           <button className="absolute -right-5 top-1/2 z-10 hidden h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full bg-white shadow-md lg:flex">
-//             <ChevronRight size={20} />
-//           </button>
-//         </div>
-
-//         <div className="mt-8 flex justify-center gap-2">
-//           <span className="h-1.5 w-7 rounded-full bg-[#073e40]" />
-//           <span className="h-1.5 w-7 rounded-full bg-slate-300" />
-//           <span className="h-1.5 w-7 rounded-full bg-slate-300" />
-//           <span className="h-1.5 w-7 rounded-full bg-slate-300" />
-//         </div>
-//       </section>
-
-//       {/* DARK STATS */}
-//       <section className="container-custom py-8">
-//         <motion.div
-//           initial={{ opacity: 0, y: 30 }}
-//           whileInView={{ opacity: 1, y: 0 }}
-//           viewport={{ once: true }}
-//           className="grid grid-cols-2 gap-8 rounded-3xl bg-[#063f40] px-6 py-10 sm:grid-cols-3 lg:grid-cols-6"
-//         >
-//           {BOTTOM_STATS.map((stat) => (
-//             <AnimatedStat key={stat.label} stat={stat} dark />
-//           ))}
-//         </motion.div>
-//       </section>
-
-//       {/* CTA */}
-//       <section className="container-custom py-2 pb-16">
-//         <AnimatedSection>
-//           <div className="relative overflow-hidden rounded-3xl bg-[#0b4a4b] px-8 py-10 lg:px-12">
-//             <div className="relative z-10 grid items-center gap-8 lg:grid-cols-[1.1fr_1fr_1fr]">
-//               <h2 className="font-heading text-3xl font-semibold leading-tight text-white lg:text-4xl">
-//                 Ready to Publish
-//                 <br />
-//                 Your Research?
-//               </h2>
-
-//               <p className="text-sm leading-6 text-white/80">
-//                 Join thousands of researchers who trust Pure Publications for
-//                 their academic journey.
-//               </p>
-
-//               <Button
-//                 to="/submit-paper"
-//                 variant="primary"
-//                 showArrow
-//                 className="justify-self-start"
-//               >
-//                 Submit Your Paper
-//               </Button>
-//             </div>
-
-//             <div className="pointer-events-none absolute inset-y-0 right-0 w-1/2 bg-[url('/images/cta-open-book.jpg')] bg-cover bg-right opacity-70" />
-//           </div>
-//         </AnimatedSection>
-//       </section>
-
-     
-//     </>
-//   );
-// }
+              <ActionButton
+                to="/submit-paper"
+                className="justify-self-start bg-[#D4A257] text-[#073F40] shadow-none hover:bg-[#E2B56F] md:justify-self-center"
+              >
+                Submit Your Paper
+              </ActionButton>
+            </div>
+          </motion.div>
+        </section>
+      </main>
+    </>
+  );
+}
