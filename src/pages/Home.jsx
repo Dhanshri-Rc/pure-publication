@@ -26,11 +26,36 @@ const BRAND = {
 };
 
 const TOP_STATS = [
-  { icon: BookOpen, value: 25, suffix: "+", label: "Journals" },
-  { icon: FileText, value: 15000, suffix: "+", label: "Published Articles" },
-  { icon: Globe2, value: 120, suffix: "+", label: "Countries" },
-  { icon: Users, value: 10000, suffix: "+", label: "Active Authors" },
-  { icon: Award, value: 98, suffix: "%", label: "Author Satisfaction" },
+  {
+    icon: BookOpen,
+    value: 25,
+    suffix: "+",
+    label: "Journals",
+  },
+  {
+    icon: FileText,
+    value: 15000,
+    suffix: "+",
+    label: "Published Articles",
+  },
+  {
+    icon: Globe2,
+    value: 120,
+    suffix: "+",
+    label: "Countries",
+  },
+  {
+    icon: Users,
+    value: 10000,
+    suffix: "+",
+    label: "Active Authors",
+  },
+  {
+    icon: Award,
+    value: 98,
+    suffix: "%",
+    label: "Author Satisfaction",
+  },
 ];
 
 const SERVICES = [
@@ -201,50 +226,99 @@ function ActionButton({
   );
 }
 
-function StatItem({ item, dark = false, compact = false }) {
+function StatItem({ item, index }) {
   const Icon = item.icon;
 
   return (
-    <div
-      className={[
-        "group flex items-center",
-        compact ? "gap-3" : "flex-col justify-center text-center",
-      ].join(" ")}
+    <motion.div
+      initial={{
+        opacity: 0,
+        y: 18,
+      }}
+      animate={{
+        opacity: 1,
+        y: 0,
+      }}
+      transition={{
+        duration: 0.5,
+        delay: 0.35 + index * 0.08,
+        ease: [0.22, 1, 0.36, 1],
+      }}
+      whileHover={{
+        y: -4,
+        scale: 1.015,
+      }}
+      className={`
+        group relative flex min-h-[64px] items-center
+        justify-start gap-4 px-3 py-2
+        sm:min-h-[70px] sm:px-4
+        lg:justify-center lg:px-5
+        ${
+          index !== TOP_STATS.length - 1
+            ? "lg:after:absolute lg:after:right-0 lg:after:top-1/2 lg:after:h-10 lg:after:w-px lg:after:-translate-y-1/2 lg:after:bg-[#DDE2E0]"
+            : ""
+        }
+      `}
     >
-      <span
-        className={[
-          "flex shrink-0 items-center justify-center rounded-full transition-transform duration-300 group-hover:-translate-y-1",
-          compact ? "h-11 w-11" : "mb-3 h-12 w-12",
-          dark
-            ? "bg-white/8 text-[#D4A257]"
-            : "bg-[#EEF1F0] text-[#073F40]",
-        ].join(" ")}
+      {/* ICON */}
+      <motion.div
+        whileHover={{
+          rotate: index === 2 ? 12 : -6,
+        }}
+        transition={{
+          duration: 0.25,
+        }}
+        className="
+          flex h-[46px] w-[46px] shrink-0 items-center justify-center
+          rounded-full bg-[#F0F2F1] text-[#0B3D3F]
+          transition-all duration-300
+          group-hover:bg-[#E7ECEA]
+          group-hover:shadow-[0_8px_20px_rgba(7,63,64,0.12)]
+          sm:h-[50px] sm:w-[50px]
+        "
       >
-        <Icon size={compact ? 19 : 21} strokeWidth={1.7} />
-      </span>
+        <Icon
+          size={24}
+          strokeWidth={1.75}
+          className="transition-transform duration-300 group-hover:scale-105"
+        />
+      </motion.div>
 
-      <span className={compact ? "" : "block"}>
-        <span
-          className={[
-            "block font-serif font-semibold leading-none",
-            compact ? "text-[21px]" : "text-[25px]",
-            dark ? "text-white" : "text-[#102E2F]",
-          ].join(" ")}
+      {/* TEXT */}
+      <div className="min-w-0">
+        <div
+          className="
+            whitespace-nowrap font-serif text-[21px] font-semibold
+            leading-none tracking-[-0.02em] text-[#102F30]
+            sm:text-[23px]
+          "
         >
           <CountUp end={item.value} />
           {item.suffix}
-        </span>
+        </div>
 
-        <span
-          className={[
-            "mt-1.5 block whitespace-nowrap text-[10px]",
-            dark ? "text-white/72" : "text-slate-600",
-          ].join(" ")}
+        <p
+          className="
+            mt-2 whitespace-nowrap text-[9px] font-medium
+            leading-none text-[#202A2A]
+            sm:text-[10px]
+          "
         >
           {item.label}
-        </span>
-      </span>
-    </div>
+        </p>
+      </div>
+
+      {/* MOBILE/TABLET HOVER BACKGROUND */}
+      <span
+        className="
+          pointer-events-none absolute inset-0 -z-10 rounded-xl
+          bg-[#F7F9F8] opacity-0
+          transition-opacity duration-300
+          group-hover:opacity-100
+          lg:hidden
+        "
+      />
+    </motion.div>
   );
 }
 
@@ -453,18 +527,86 @@ export default function Home() {
           </div>
 
           {/* FLOATING TOP STATS */}
-          <div className="relative z-20 mx-auto -mt-12 max-w-[1010px] px-5 sm:px-8">
-            <motion.div
-              initial={{ opacity: 0, y: 24 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.35, duration: 0.6 }}
-              className="grid grid-cols-2 gap-x-4 gap-y-6 rounded-[12px] border border-slate-200 bg-white px-5 py-5 shadow-[0_15px_40px_rgba(7,63,64,.12)] sm:grid-cols-3 lg:grid-cols-5 lg:px-8"
-            >
-              {TOP_STATS.map((item) => (
-                <StatItem key={item.label} item={item} compact />
-              ))}
-            </motion.div>
-          </div>
+        {/* FLOATING TOP STATISTICS */}
+<section
+  aria-label="Pure Publications statistics"
+  className="relative z-20"
+>
+  <div
+    className="
+      mx-auto -mt-11 w-full
+      max-w-[1090px]
+      px-4
+      sm:-mt-12 sm:px-6
+      lg:-mt-[52px] lg:px-8
+      xl:px-0
+    "
+  >
+    <motion.div
+      initial={{
+        opacity: 0,
+        y: 28,
+        scale: 0.985,
+      }}
+      animate={{
+        opacity: 1,
+        y: 0,
+        scale: 1,
+      }}
+      transition={{
+        delay: 0.25,
+        duration: 0.65,
+        ease: [0.22, 1, 0.36, 1],
+      }}
+      className="
+        relative overflow-hidden
+        rounded-[18px]
+        border border-[#E1E5E3]
+        bg-white/95
+        px-3 py-3
+        shadow-[0_14px_38px_rgba(7,63,64,0.12)]
+        backdrop-blur-md
+
+        grid grid-cols-1
+        gap-1
+
+        min-[420px]:grid-cols-2
+
+        sm:grid-cols-2
+        sm:gap-x-2
+        sm:px-4
+        sm:py-4
+
+        md:grid-cols-3
+
+        lg:grid-cols-5
+        lg:gap-0
+        lg:px-4
+        lg:py-3
+      "
+    >
+      {/* SUBTLE TOP SHINE */}
+      <div
+        aria-hidden="true"
+        className="
+          pointer-events-none absolute inset-x-6 top-0 h-px
+          bg-gradient-to-r
+          from-transparent
+          via-white
+          to-transparent
+        "
+      />
+
+      {TOP_STATS.map((item, index) => (
+        <StatItem
+          key={item.label}
+          item={item}
+          index={index}
+        />
+      ))}
+    </motion.div>
+  </div>
+</section>
         </section>
 
         {/* INDEXING */}
