@@ -12,7 +12,7 @@ import { collection, addDoc, serverTimestamp } from "firebase/firestore";
 import { db } from "../firebase/firebase";
 import { NAV_LINKS, SITE_NAME, SOCIAL_LINKS, CONTACT_INFO } from "../utils/constants";
 import { validateEmail } from "../utils/helpers";
-
+import logo from "../assets/images/purelogo.webp";
 // Lightweight inline social icons (lucide-react no longer ships brand logos)
 function FacebookIcon(props) {
   return (
@@ -52,12 +52,7 @@ const socialIcons = {
   Instagram: InstagramIcon,
 };
 
-const RESOURCE_LINKS = [
-  { name: "Author Guidelines", path: "/services" },
-  { name: "Peer Review Policy", path: "/services" },
-  { name: "Publication Ethics", path: "/about" },
-  { name: "FAQs", path: "/contact" },
-];
+
 
 export default function Footer() {
   const [email, setEmail] = useState("");
@@ -83,23 +78,20 @@ export default function Footer() {
   }
 
   return (
-    <footer className="bg-navy-950 text-white pt-20 pb-8 relative overflow-hidden">
+    <footer className="bg-[#132525] text-white pt-6 pb-4 relative overflow-hidden">
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-px bg-gradient-to-r from-transparent via-amber-500/40 to-transparent" />
 
       <div className="container-custom">
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
+        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-16 mb-6">
           <div>
-            <Link to="/" className="flex items-center gap-2 mb-5">
-              <span className="flex items-center justify-center w-10 h-10 rounded-xl bg-amber-500 text-navy-900">
-                <BookOpen size={20} />
-              </span>
-              <span className="font-heading font-bold text-lg">{SITE_NAME}</span>
+            <Link to="/" className="flex items-center gap-2 mb-4">
+             <img src={logo} alt="Pure Publication Logo" className="w-32 h-10" />
             </Link>
-            <p className="text-white/60 text-sm leading-relaxed mb-6">
+            <p className="text-white/60 text-[12px] leading-relaxed mb-4">
               A trusted platform for researchers and academicians to publish
               high-quality, peer-reviewed research across disciplines.
             </p>
-            <div className="flex gap-3">
+            <div className="flex gap-2">
               {SOCIAL_LINKS.map((social) => {
                 const Icon = socialIcons[social.name];
                 return (
@@ -111,7 +103,7 @@ export default function Footer() {
                     aria-label={social.name}
                     className="w-9 h-9 rounded-full bg-white/10 flex items-center justify-center hover:bg-amber-500 hover:scale-110 hover:-translate-y-1 transition-all duration-300"
                   >
-                    <Icon size={16} />
+                    <Icon size={14} />
                   </a>
                 );
               })}
@@ -119,13 +111,13 @@ export default function Footer() {
           </div>
 
           <div>
-            <h4 className="font-heading font-semibold text-lg mb-5">Quick Links</h4>
-            <ul className="space-y-3">
+            <h4 className="font-heading font-semibold text-md mb-2">Quick Links</h4>
+            <ul className="space-y-[1px]">
               {NAV_LINKS.map((link) => (
                 <li key={link.path}>
                   <Link
                     to={link.path}
-                    className="text-white/60 hover:text-amber-400 text-sm transition-colors duration-300"
+                    className="text-white/60 hover:text-amber-400 text-[12px] transition-colors duration-300"
                   >
                     {link.name}
                   </Link>
@@ -135,39 +127,28 @@ export default function Footer() {
           </div>
 
           <div>
-            <h4 className="font-heading font-semibold text-lg mb-5">Resources</h4>
-            <ul className="space-y-3">
-              {RESOURCE_LINKS.map((link) => (
-                <li key={link.name}>
-                  <Link
-                    to={link.path}
-                    className="text-white/60 hover:text-amber-400 text-sm transition-colors duration-300"
-                  >
-                    {link.name}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-            <ul className="space-y-3 mt-6 text-sm text-white/60">
+            <h4 className="font-heading font-semibold text-md mb-3">Resources</h4>
+          
+            <ul className="space-y-2 mt-4 text-[12px] text-white/60">
               <li className="flex items-start gap-2">
-                <MapPin size={16} className="mt-0.5 shrink-0 text-amber-400" />
+                <MapPin size={14} className="mt-0.5 shrink-0 text-amber-400" />
                 {CONTACT_INFO.address}
               </li>
               <li className="flex items-center gap-2">
-                <Mail size={16} className="text-amber-400" />
+                <Mail size={14} className="text-amber-400" />
                 {CONTACT_INFO.email}
               </li>
               <li className="flex items-center gap-2">
-                <Phone size={16} className="text-amber-400" />
+                <Phone size={14} className="text-amber-400" />
                 {CONTACT_INFO.phone}
               </li>
             </ul>
           </div>
 
           <div>
-            <h4 className="font-heading font-semibold text-lg mb-5">Newsletter</h4>
-            <p className="text-white/60 text-sm mb-4 leading-relaxed">
-              Subscribe to get the latest call for papers and journal updates.
+            <h4 className="font-heading font-semibold text-md mb-3">Newsletter</h4>
+            <p className="text-white/60 text-[12px] mb-4 leading-relaxed">
+              Subscribe to get the latest call <br /> for papers and journal updates.
             </p>
             <form onSubmit={handleSubscribe} className="flex gap-2">
               <input
@@ -175,7 +156,7 @@ export default function Footer() {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder="Your email"
-                className="flex-1 min-w-0 bg-white/10 border border-white/20 focus:border-amber-400 rounded-full px-4 py-2.5 text-sm outline-none transition-all duration-300 placeholder-white/40"
+                className="flex-1 min-w-0 bg-white/10 border border-white/20 focus:border-amber-400 rounded-full px-4 py-2 text-xs outline-none transition-all duration-300 placeholder-white/40"
               />
               <motion.button
                 whileHover={{ scale: 1.08 }}
@@ -196,7 +177,7 @@ export default function Footer() {
           </div>
         </div>
 
-        <div className="border-t border-white/10 pt-6 flex flex-col sm:flex-row justify-between items-center gap-3 text-xs text-white/50">
+        <div className="border-t border-white/10 pt-3 flex flex-col sm:flex-row justify-between items-center gap-3 text-xs text-white/50">
           <p>
             © {new Date().getFullYear()} {SITE_NAME}. All rights reserved.
           </p>
