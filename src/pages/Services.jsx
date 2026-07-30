@@ -940,7 +940,7 @@ export default function Services() {
                 viewport={{ once: true }}
                 className="text-center lg:text-left"
               >
-                <h2 className="font-serif text-[25px] font-semibold text-white sm:text-[29px]">
+                <h2 className="font-serif text-[20px] font-semibold text-white sm:text-[22px]">
                   Ready to Take the Next Step?
                 </h2>
 

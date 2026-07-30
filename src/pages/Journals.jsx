@@ -26,7 +26,7 @@ import {
 import Seo from "../components/Seo";
 import { getJournals } from "../services/journalService";
 
-import journalsHero from "../assets/images/j-bg.png";
+import journalsHero from "../assets/images/journal_bg.png";
 import recommendationIcon from "../assets/images/journalcta.png";
 
 /* =========================================================
@@ -362,7 +362,7 @@ export default function Journals() {
     setBookmarked((previous) =>
       previous.includes(journalId)
         ? previous.filter((id) => id !== journalId)
-        : [...previous, journalId]
+        : [...previous, journalId],
     );
   };
 
@@ -415,13 +415,13 @@ export default function Journals() {
 
     if (sortBy === "title-asc") {
       result = [...result].sort((a, b) =>
-        (a.title || "").localeCompare(b.title || "")
+        (a.title || "").localeCompare(b.title || ""),
       );
     }
 
     if (sortBy === "title-desc") {
       result = [...result].sort((a, b) =>
-        (b.title || "").localeCompare(a.title || "")
+        (b.title || "").localeCompare(a.title || ""),
       );
     }
 
@@ -429,7 +429,7 @@ export default function Journals() {
       result = [...result].sort(
         (a, b) =>
           Number.parseFloat(b.impactFactor || 0) -
-          Number.parseFloat(a.impactFactor || 0)
+          Number.parseFloat(a.impactFactor || 0),
       );
     }
 
@@ -446,12 +446,12 @@ export default function Journals() {
 
   const totalPages = Math.max(
     1,
-    Math.ceil(filteredJournals.length / ITEMS_PER_PAGE)
+    Math.ceil(filteredJournals.length / ITEMS_PER_PAGE),
   );
 
   const paginatedJournals = filteredJournals.slice(
     (currentPage - 1) * ITEMS_PER_PAGE,
-    currentPage * ITEMS_PER_PAGE
+    currentPage * ITEMS_PER_PAGE,
   );
 
   useEffect(() => {
@@ -461,13 +461,11 @@ export default function Journals() {
   }, [currentPage, totalPages]);
 
   const showingStart =
-    filteredJournals.length === 0
-      ? 0
-      : (currentPage - 1) * ITEMS_PER_PAGE + 1;
+    filteredJournals.length === 0 ? 0 : (currentPage - 1) * ITEMS_PER_PAGE + 1;
 
   const showingEnd = Math.min(
     currentPage * ITEMS_PER_PAGE,
-    filteredJournals.length
+    filteredJournals.length,
   );
 
   const hasActiveFilters =
@@ -519,21 +517,14 @@ export default function Journals() {
         ===================================================== */}
 
         <section className="relative overflow-hidden border-t border-[#dce7e5] bg-white">
-          <div className="absolute inset-0 opacity-[0.34]">
-            <div className="absolute left-[7%] top-14 h-1.5 w-1.5 rounded-full bg-[#d2a45d]" />
-            <div className="absolute left-[15%] top-28 h-1 w-1 rounded-full bg-[#bdd2cf]" />
-            <div className="absolute left-[26%] top-16 h-1 w-1 rounded-full bg-[#d2a45d]" />
-            <div className="absolute left-[38%] top-36 h-1.5 w-1.5 rounded-full bg-[#bdd2cf]" />
-          </div>
-
-          <div className="mx-auto grid min-h-[350px] max-w-[1440px] lg:grid-cols-[47%_53%]">
+          <div className="mx-auto grid min-h-[390px] sm:min-h-[420px] lg:min-h-[470px] max-w-[1440px] lg:grid-cols-[47%_53%]">
             <motion.div
               initial={{ opacity: 0, x: -35 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.7 }}
               className="relative z-10 flex items-center px-5 py-14 sm:px-8 lg:px-14 xl:px-20"
             >
-              <div className="max-w-[640px]">
+              <div className="max-w-[640px] mt-12">
                 <div className="mb-4 flex items-center gap-3">
                   <span className="h-px w-8 bg-[#c4934d]" />
                   <span className="text-[11px] font-bold uppercase tracking-[0.18em] text-[#bd8a43]">
@@ -541,7 +532,7 @@ export default function Journals() {
                   </span>
                 </div>
 
-                <h1 className="font-serif text-[40px] font-semibold leading-[1.03] tracking-[-0.035em] text-[#073b3a] sm:text-[52px] lg:text-[58px]">
+                <h1 className="font-serif font-semibold leading-[1.03] tracking-[-0.035em] text-[#073b3a]  text-[30px] sm:text-[38px] lg:text-[44px]">
                   Explore Our
                   <span className="mt-1 block text-[#bd8a43]">
                     Academic Journals
@@ -590,7 +581,7 @@ export default function Journals() {
                 }}
               />
 
-              <div className="absolute inset-0 bg-gradient-to-r from-white via-white/15 to-transparent" />
+            
 
               <div
                 className="absolute inset-y-0 -left-1 w-[125px] bg-white"
@@ -607,7 +598,7 @@ export default function Journals() {
                 backgroundImage: `url(${journalsHero})`,
               }}
             >
-              <div className="absolute inset-0 bg-gradient-to-t from-[#052f2f]/50 to-transparent" />
+            
             </div>
           </div>
         </section>
@@ -616,67 +607,69 @@ export default function Journals() {
             STATISTICS SECTION
         ===================================================== */}
 
-        <section className="relative z-20 mx-auto -mt-3 max-w-[1280px] px-4 sm:px-6 lg:-mt-8">
-          <motion.div
-            initial={{ opacity: 0, y: 35 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.3 }}
-            transition={{ duration: 0.6 }}
-            className="grid overflow-hidden rounded-2xl border border-[#e2e9e7] bg-white shadow-[0_15px_45px_rgba(20,58,57,0.13)] sm:grid-cols-2 lg:grid-cols-5"
-          >
-            {[
-              {
-                icon: BookOpen,
-                number: "25+",
-                label: "Journals",
-              },
-              {
-                icon: FileText,
-                number: "15,000+",
-                label: "Articles Published",
-              },
-              {
-                icon: Globe2,
-                number: "120+",
-                label: "Countries",
-              },
-              {
-                icon: Users,
-                number: "10,000+",
-                label: "Active Authors",
-              },
-              {
-                icon: Award,
-                number: "98%",
-                label: "Author Satisfaction",
-              },
-            ].map((item, index) => {
-              const Icon = item.icon;
+        <section className="relative z-20 -mt-3 lg:-mt-8">
+          <div className="mx-auto w-full max-w-[1440px] px-5 sm:px-8 lg:px-14 xl:px-20">
+            <motion.div
+              initial={{ opacity: 0, y: 35 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.3 }}
+              transition={{ duration: 0.6 }}
+              className="grid overflow-hidden rounded-2xl border border-[#e2e9e7] bg-white shadow-[0_15px_45px_rgba(20,58,57,0.13)] sm:grid-cols-2 lg:grid-cols-5"
+            >
+              {[
+                {
+                  icon: BookOpen,
+                  number: "25+",
+                  label: "Journals",
+                },
+                {
+                  icon: FileText,
+                  number: "15,000+",
+                  label: "Articles Published",
+                },
+                {
+                  icon: Globe2,
+                  number: "120+",
+                  label: "Countries",
+                },
+                {
+                  icon: Users,
+                  number: "10,000+",
+                  label: "Active Authors",
+                },
+                {
+                  icon: Award,
+                  number: "98%",
+                  label: "Author Satisfaction",
+                },
+              ].map((item, index) => {
+                const Icon = item.icon;
 
-              return (
-                <motion.div
-                  key={item.label}
-                  whileHover={{ y: -4, backgroundColor: "#fbf7f0" }}
-                  className={`flex min-h-[105px] items-center gap-4 px-6 py-5 transition ${
-                    index !== 4 ? "lg:border-r lg:border-[#e4ebe9]" : ""
-                  }`}
-                >
-                  <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-[#eef4f2] text-[#0a4a47]">
-                    <Icon size={22} strokeWidth={1.7} />
-                  </div>
+                return (
+                  <motion.div
+                    key={item.label}
+                    whileHover={{ y: -4, backgroundColor: "#fbf7f0" }}
+                    className={`flex min-h-[105px] items-center gap-4 px-6 py-5 transition ${
+                      index !== 4 ? "lg:border-r lg:border-[#e4ebe9]" : ""
+                    }`}
+                  >
+                    <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-[#eef4f2] text-[#0a4a47]">
+                      <Icon size={22} strokeWidth={1.7} />
+                    </div>
 
-                  <div>
-                    <p className="font-serif text-[24px] font-bold leading-none text-[#123f3e]">
-                      {item.number}
-                    </p>
-                    <p className="mt-2 text-[11px] font-medium text-[#71807f]">
-                      {item.label}
-                    </p>
-                  </div>
-                </motion.div>
-              );
-            })}
-          </motion.div>
+                    <div>
+                      <p className="font-serif text-[24px] font-[550] leading-none text-[#123f3e]">
+                        {item.number}
+                      </p>
+                      <p className="mt-2 text-[11px] font-medium text-[#71807f]">
+                        {item.label}
+                      </p>
+                    </div>
+                  </motion.div>
+                );
+              })}
+            </motion.div>
+          </div>
         </section>
 
         {/* =====================================================
@@ -684,7 +677,7 @@ export default function Journals() {
         ===================================================== */}
 
         <section className="py-8 sm:py-11">
-          <div className="mx-auto max-w-[1280px] px-4 sm:px-6">
+          <div className="mx-auto w-full max-w-[1440px] px-5 sm:px-8 lg:px-14 xl:px-20">
             {/* Directory toolbar */}
 
             <div className="mb-5 flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
@@ -820,7 +813,7 @@ export default function Journals() {
                                   item,
                                   subjectAreas,
                                   setSubjectAreas,
-                                  "All Subjects"
+                                  "All Subjects",
                                 )
                               }
                               className="peer sr-only"
@@ -876,7 +869,7 @@ export default function Journals() {
                                   item,
                                   indexing,
                                   setIndexing,
-                                  "__none__"
+                                  "__none__",
                                 )
                               }
                               className="peer sr-only"
@@ -932,7 +925,7 @@ export default function Journals() {
                                   item,
                                   frequencies,
                                   setFrequencies,
-                                  "All Frequency"
+                                  "All Frequency",
                                 )
                               }
                               className="peer sr-only"
@@ -988,7 +981,7 @@ export default function Journals() {
                                   item,
                                   accessTypes,
                                   setAccessTypes,
-                                  "All"
+                                  "All",
                                 )
                               }
                               className="peer sr-only"
@@ -1293,7 +1286,7 @@ export default function Journals() {
                       {
                         length: totalPages,
                       },
-                      (_, pageIndex) => pageIndex + 1
+                      (_, pageIndex) => pageIndex + 1,
                     )
                       .slice(0, 5)
                       .map((page) => (
@@ -1333,9 +1326,7 @@ export default function Journals() {
                       type="button"
                       disabled={currentPage === totalPages}
                       onClick={() =>
-                        setCurrentPage((page) =>
-                          Math.min(totalPages, page + 1)
-                        )
+                        setCurrentPage((page) => Math.min(totalPages, page + 1))
                       }
                       className="flex h-9 w-9 items-center justify-center rounded-md border border-[#d7e1df] bg-white text-[#47615f] transition hover:border-[#0a4b48] hover:text-[#0a4b48] disabled:cursor-not-allowed disabled:opacity-35"
                     >
@@ -1353,7 +1344,7 @@ export default function Journals() {
         ===================================================== */}
 
         <section className="pb-12">
-          <div className="mx-auto max-w-[1280px] px-4 sm:px-6">
+          <div className="mx-auto w-full max-w-[1440px] px-5 sm:px-8 lg:px-14 xl:px-20">
             <motion.div
               initial={{ opacity: 0, y: 25 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -1377,7 +1368,7 @@ export default function Journals() {
                 </motion.div>
 
                 <div className="flex-1">
-                  <h2 className="font-serif text-[20px] font-bold text-[#173f3d] sm:text-[23px]">
+                  <h2 className="font-serif text-[20px] font-[550] text-[#173f3d] sm:text-[22px]">
                     Can’t find the right journal?
                   </h2>
 
@@ -1388,11 +1379,11 @@ export default function Journals() {
 
                 <Link
                   to="/contact"
-                  className="group inline-flex min-w-[210px] items-center justify-center gap-3 rounded-md bg-[#073f3d] px-6 py-3.5 text-[11px] font-semibold text-white shadow-[0_8px_18px_rgba(7,63,61,0.19)] transition duration-300 hover:-translate-y-0.5 hover:bg-[#bd8a43]"
+                  className="group inline-flex min-w-[210px] items-center justify-center gap-3 rounded-md bg-[#073f3d] px-6 py-3.5 text-[12px] font-semibold text-white shadow-[0_8px_18px_rgba(7,63,61,0.19)] transition duration-300 hover:-translate-y-0.5 hover:bg-[#bd8a43]"
                 >
                   Get Recommendation
                   <ArrowRight
-                    size={14}
+                    size={15}
                     className="transition-transform duration-300 group-hover:translate-x-1"
                   />
                 </Link>
@@ -1471,7 +1462,7 @@ export default function Journals() {
                                   item,
                                   subjectAreas,
                                   setSubjectAreas,
-                                  "All Subjects"
+                                  "All Subjects",
                                 )
                               }
                               className="sr-only"
@@ -1516,7 +1507,7 @@ export default function Journals() {
                                   item,
                                   indexing,
                                   setIndexing,
-                                  "__none__"
+                                  "__none__",
                                 )
                               }
                               className="sr-only"
@@ -1561,7 +1552,7 @@ export default function Journals() {
                                   item,
                                   frequencies,
                                   setFrequencies,
-                                  "All Frequency"
+                                  "All Frequency",
                                 )
                               }
                               className="sr-only"
@@ -1606,7 +1597,7 @@ export default function Journals() {
                                   item,
                                   accessTypes,
                                   setAccessTypes,
-                                  "All"
+                                  "All",
                                 )
                               }
                               className="sr-only"
