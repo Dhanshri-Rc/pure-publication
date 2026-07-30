@@ -26,7 +26,7 @@ import {
 import Seo from "../components/Seo";
 import { getJournals } from "../services/journalService";
 
-import journalsHero from "../assets/images/j-bg.png";
+import journalsHero from "../assets/images/journal_bg.png";
 import recommendationIcon from "../assets/images/journalcta.png";
 
 /* =========================================================
@@ -517,7 +517,7 @@ export default function Journals() {
         ===================================================== */}
 
         <section className="relative overflow-hidden border-t border-[#dce7e5] bg-white">
-          <div className="mx-auto grid min-h-[350px] max-w-[1440px] lg:grid-cols-[47%_53%]">
+          <div className="mx-auto grid min-h-[390px] sm:min-h-[420px] lg:min-h-[470px] max-w-[1440px] lg:grid-cols-[47%_53%]">
             <motion.div
               initial={{ opacity: 0, x: -35 }}
               animate={{ opacity: 1, x: 0 }}
@@ -581,7 +581,7 @@ export default function Journals() {
                 }}
               />
 
-              <div className="absolute inset-0 bg-gradient-to-r from-white via-white/15 to-transparent" />
+            
 
               <div
                 className="absolute inset-y-0 -left-1 w-[125px] bg-white"
@@ -598,7 +598,7 @@ export default function Journals() {
                 backgroundImage: `url(${journalsHero})`,
               }}
             >
-              <div className="absolute inset-0 bg-gradient-to-t from-[#052f2f]/50 to-transparent" />
+            
             </div>
           </div>
         </section>
