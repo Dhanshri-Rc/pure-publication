@@ -524,7 +524,7 @@ export default function Journals() {
               transition={{ duration: 0.7 }}
               className="relative z-10 flex items-center px-5 py-14 sm:px-8 lg:px-14 xl:px-20"
             >
-              <div className="max-w-[640px] mt-12">
+              <div className="max-w-[640px]">
                 <div className="mb-4 flex items-center gap-3">
                   <span className="h-px w-8 bg-[#c4934d]" />
                   <span className="text-[11px] font-bold uppercase tracking-[0.18em] text-[#bd8a43]">
