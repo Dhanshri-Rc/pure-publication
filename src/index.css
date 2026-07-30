@@ -16,6 +16,34 @@ h1, h2, h3, h4, h5, h6 {
   @apply font-heading;
 }
 
+
+body {
+  margin: 0;
+  min-width: 320px;
+  background: #ffffff;
+  color: #153d3e;
+  font-family: "Inter", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+.font-serif {
+  font-family: "Playfair Display", Georgia, serif;
+}
+
+.indexing-scrollbar-hidden {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.indexing-scrollbar-hidden::-webkit-scrollbar {
+  display: none;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
 ::selection {
   @apply bg-amber-500/30;
 }
@@ -40,7 +68,14 @@ h1, h2, h3, h4, h5, h6 {
 .indexing-scrollbar-hidden::-webkit-scrollbar {
   display: none;
 }
+.indexing-scrollbar-hidden {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
 
+.indexing-scrollbar-hidden::-webkit-scrollbar {
+  display: none;
+}
 .container-custom {
   @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
 }
