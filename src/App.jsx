@@ -64,9 +64,9 @@ const JournalDetails = lazy(() => import("./pages/JournalDetails"));
 const SubmitPaper = lazy(() => import("./pages/SubmitPaper"));
 const Contact = lazy(() => import("./pages/Contact"));
 const PrivacyPolicy = lazy(() => import("./pages/PrivacyPolicy"));
-// const TermsAndConditions = lazy(() =>
-//   import("./pages/TermsAndConditions")
-// );
+const TermsAndConditions = lazy(() =>
+  import("./pages/TermsAndConditions")
+);
 const NotFound = lazy(() => import("./pages/NotFound"));
 
 export default function App() {
@@ -80,7 +80,7 @@ export default function App() {
   const isStandalonePage = standalonePages.includes(location.pathname);
 
   return (
-    <div className="flex min-h-screen flex-col overflow-x-hidden">
+    <div className="flex min-h-screen flex-col overflow-x-clip">
       <ScrollToTop />
 
       {!isStandalonePage && <Navbar />}
@@ -109,10 +109,10 @@ export default function App() {
                 element={<PrivacyPolicy />}
               />
 
-              {/* <Route
+              <Route
                 path="/terms-and-conditions"
                 element={<TermsAndConditions />}
-              /> */}
+              />
 
               <Route path="*" element={<NotFound />} />
             </Routes>
