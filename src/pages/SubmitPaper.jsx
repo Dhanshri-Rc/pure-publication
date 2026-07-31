@@ -514,7 +514,7 @@ const textareaClass = `
 
 function FieldLabel({ children, required = false }) {
   return (
-    <label className="mb-2 block text-[11px] font-semibold text-[#163d3a]">
+    <label className="mb-2 block text-[13px] font-[550] text-[#163d3a]">
       {children}
 
       {required && <span className="ml-1 text-[#d95d55]">*</span>}
@@ -529,7 +529,7 @@ function ErrorText({ message }) {
     <motion.p
       initial={{ opacity: 0, y: -3 }}
       animate={{ opacity: 1, y: 0 }}
-      className="mt-1.5 text-[10px] font-medium text-red-500"
+      className="mt-1.5 text-[12px] font-medium text-red-500"
     >
       {message}
     </motion.p>
@@ -538,7 +538,7 @@ function ErrorText({ message }) {
 
 function RadioOption({ name, value, label, register }) {
   return (
-    <label className="group flex cursor-pointer items-center gap-2 text-[11px] text-[#526461]">
+    <label className="group flex cursor-pointer items-center gap-2 text-[12px] text-[#526461]">
       <input
         type="radio"
         value={value}
@@ -612,15 +612,15 @@ function GuidelineItem({ icon: Icon, title, description }) {
           group-hover:text-[#c68e33]
         "
       >
-        <Icon size={15} strokeWidth={1.8} />
+        <Icon size={16} strokeWidth={1.8} />
       </span>
 
       <span className="min-w-0 flex-1">
-        <span className="block text-[11px] font-semibold text-[#173d3a]">
+        <span className="block text-[13px] font-semibold text-[#173d3a]">
           {title}
         </span>
 
-        <span className="mt-0.5 block text-[9px] leading-4 text-[#7a8987]">
+        <span className="mt-0.5 block text-[11px] leading-4 text-[#7a8987]">
           {description}
         </span>
       </span>
@@ -663,11 +663,11 @@ function BenefitItem({ icon: Icon, title, description }) {
       </span>
 
       <span>
-        <span className="block text-[11px] font-semibold text-[#173d3a]">
+        <span className="block text-[13px] font-[550] text-[#173d3a]">
           {title}
         </span>
 
-        <span className="mt-1 block text-[9px] leading-4 text-[#72817e]">
+        <span className="mt-1 block text-[11px] leading-4 text-[#72817e]">
           {description}
         </span>
       </span>
@@ -930,7 +930,7 @@ export default function SubmitPaper() {
                   className="
                     mt-7
                     grid
-                    max-w-[610px]
+                    max-w-[650px]
                     grid-cols-2
                     overflow-hidden
                     rounded-[7px]
@@ -974,7 +974,7 @@ export default function SubmitPaper() {
                           min-h-[76px]
                           items-center
                           gap-3
-                          px-4
+                          px-2
                           py-3
                           ${index > 0 ? "border-l border-white/15" : ""}
                         `}
@@ -986,11 +986,11 @@ export default function SubmitPaper() {
                         />
 
                         <span>
-                          <span className="block font-serif text-[20px] font-semibold leading-none text-white">
+                          <span className="block font-serif text-[20px] font-[550] leading-none text-white">
                             {item.value}
                           </span>
 
-                          <span className="mt-1.5 block text-[8px] leading-3 text-white/80">
+                          <span className="mt-1.5 block text-[10px] leading-3 text-white/80">
                             {item.label}
                           </span>
                         </span>
@@ -1006,7 +1006,7 @@ export default function SubmitPaper() {
         {/* SUBMISSION AREA */}
         <section
           id="submission-form"
-          className="scroll-mt-24 bg-[#fefefe] px-4 pb-16 pt-10 sm:px-6 lg:px-8"
+          className="scroll-mt-24 bg-[#fefefe] px-4 pb-16 pt-6 sm:px-6 lg:px-8"
         >
           <div className="mx-auto w-full max-w-[1240px]">
             <motion.div
@@ -1071,15 +1071,15 @@ export default function SubmitPaper() {
                         }}
                         className="
                           flex
-                          h-9
-                          w-9
+                          h-12
+                          w-12
                           items-center
                           justify-center
                           rounded-full
                           border
                           border-[#d7e0de]
-                          text-[12px]
-                          font-semibold
+                          text-[16px]
+                          font-[550]
                           shadow-[0_4px_13px_rgba(7,63,64,0.07)]
                         "
                       >
@@ -1090,7 +1090,7 @@ export default function SubmitPaper() {
                         className={`
                           mt-3
                           hidden
-                          text-[10px]
+                          text-[12px]
                           leading-4
                           sm:block
                           ${
@@ -1142,12 +1142,12 @@ export default function SubmitPaper() {
                             Step 1: Manuscript Details
                           </h3>
 
-                          <p className="mt-1 text-[12px] text-[#788684]">
+                          <p className="mt-1 text-[13px] text-[#788684]">
                             Please provide the basic details of your manuscript.
                           </p>
                         </div>
 
-                        <p className="pt-1 text-[11px] text-[#7d8987]">
+                        <p className="pt-1 text-[12px] text-[#7d8987]">
                           All fields marked
                           <span className="mx-1 text-red-500">*</span>
                           are mandatory
@@ -1666,11 +1666,11 @@ export default function SubmitPaper() {
                               }
                             `}
                           >
-                            <span className="text-[10px] font-semibold text-[#355350]">
+                            <span className="text-[12px] font-semibold text-[#355350]">
                               {label}
                             </span>
 
-                            <span className="break-words text-[10px] leading-5 text-[#687b77]">
+                            <span className="break-words text-[12px] leading-5 text-[#687b77]">
                               {value || "Not provided"}
                             </span>
                           </div>
@@ -1957,13 +1957,13 @@ export default function SubmitPaper() {
                     Need Help?
                   </h3>
 
-                  <p className="mt-2 text-[11px] leading-5 text-[#74827f]">
+                  <p className="mt-2 text-[12px] leading-5 text-[#74827f]">
                     Our support team is here to assist you at every step of your
                     submission.
                   </p>
 
                   <a
-                    href="tel:+919876543210"
+                    href="tel:+91 8446723800"
                     className="group mt-4 flex items-start gap-3"
                   >
                     <span
@@ -1982,22 +1982,22 @@ export default function SubmitPaper() {
                         group-hover:text-white
                       "
                     >
-                      <Phone size={14} />
+                      <Phone size={16} />
                     </span>
 
                     <span>
-                      <span className="block text-[11px] font-semibold text-[#1d413e]">
+                      <span className="block text-[12px] font-semibold text-[#1d413e]">
                         +91 84467 23800
                       </span>
 
-                      <span className="mt-1 block text-[8px] text-[#7c8987]">
+                      <span className="mt-1 block text-[10px] text-[#7c8987]">
                         Mon - Fri, 10:00 AM - 6:00 PM IST
                       </span>
                     </span>
                   </a>
 
                   <a
-                    href="mailto:support@purepublications.org"
+                    href="mailto:publicationpure@gmail.com"
                     className="group mt-4 flex items-start gap-3"
                   >
                     <span
@@ -2016,15 +2016,15 @@ export default function SubmitPaper() {
                         group-hover:text-white
                       "
                     >
-                      <Mail size={14} />
+                      <Mail size={16} />
                     </span>
 
                     <span className="min-w-0">
-                      <span className="block break-all text-[10px] font-semibold text-[#1d413e]">
+                      <span className="block break-all text-[12px] font-semibold text-[#1d413e]">
                         publicationpure@gmail.com
                       </span>
 
-                      <span className="mt-1 block text-[8px] text-[#7c8987]">
+                      <span className="mt-1 block text-[10px] text-[#7c8987]">
                         We respond within 24 hours
                       </span>
                     </span>
@@ -2049,10 +2049,10 @@ export default function SubmitPaper() {
                     ].map((tip) => (
                       <div
                         key={tip}
-                        className="flex items-start gap-2 text-[9px] leading-4 text-[#657572]"
+                        className="flex items-start gap-2 text-[11px] leading-4 text-[#657572]"
                       >
                         <Check
-                          size={12}
+                          size={13}
                           className="mt-0.5 shrink-0 text-[#073f40]"
                         />
 
@@ -2064,7 +2064,7 @@ export default function SubmitPaper() {
                   <motion.button
                     type="button"
                     whileHover={{ x: 4 }}
-                    className="mt-5 flex items-center gap-3 text-[10px] font-bold text-[#153f3c]"
+                    className="mt-5 flex items-center gap-3 text-[12px] font-[550] text-[#153f3c]"
                   >
                     View Author Guidelines
                     <ArrowRight size={14} />
@@ -2083,7 +2083,7 @@ export default function SubmitPaper() {
             >
               <motion.h2
                 variants={fadeUp}
-                className="text-center font-serif text-[17px] font-semibold text-[#133d3a]"
+                className="text-center font-serif text-[18px] font-[550] text-[#133d3a]"
               >
                 Why Publish with Pure Publications?
               </motion.h2>
@@ -2121,88 +2121,7 @@ export default function SubmitPaper() {
               </div>
             </motion.section>
 
-            {/* CTA */}
-            <motion.section
-              variants={fadeUp}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true, amount: 0.25 }}
-              whileHover={{ y: -3 }}
-              className="
-                relative
-                mt-5
-                overflow-hidden
-                rounded-[8px]
-                bg-[#073f40]
-                px-6
-                py-5
-                shadow-[0_14px_35px_rgba(7,63,64,0.16)]
-                sm:px-8
-              "
-            >
-              <div className="absolute inset-0 bg-[radial-gradient(circle_at_80%_20%,rgba(212,162,87,0.18),transparent_35%)]" />
-
-              <div className="relative z-10 flex flex-col items-center gap-5 sm:flex-row">
-                <motion.div
-                  whileHover={{ rotate: -3, scale: 1.05 }}
-                  className="
-                    flex
-                    h-14
-                    w-14
-                    shrink-0
-                    items-center
-                    justify-center
-                    rounded-[7px]
-                    bg-[#f5efe4]
-                    text-[#d09a43]
-                  "
-                >
-                  <Mail size={28} />
-                </motion.div>
-
-                <div className="min-w-0 flex-1 text-center sm:text-left">
-                  <h2 className="font-serif text-[20px] font-semibold text-white">
-                    Ready to Submit Your Research?
-                  </h2>
-
-                  <p className="mt-1.5 text-[10px] leading-5 text-white/75">
-                    Join thousands of researchers who trust Pure Publications
-                    for their valuable research.
-                  </p>
-                </div>
-
-                <motion.button
-                  type="button"
-                  whileHover={{ y: -2 }}
-                  whileTap={{ scale: 0.97 }}
-                  onClick={() => {
-                    setStep(0);
-                    scrollToForm();
-                  }}
-                  className="
-                    flex
-                    min-h-[42px]
-                    shrink-0
-                    items-center
-                    justify-center
-                    gap-3
-                    rounded-[7px]
-                    bg-[#d4a257]
-                    px-6
-                    text-[11px]
-                    font-bold
-                    text-[#073f40]
-                    shadow-[0_8px_20px_rgba(0,0,0,0.15)]
-                    transition-all
-                    duration-300
-                    hover:bg-[#e3b86f]
-                  "
-                >
-                  Submit Your Paper
-                  <ArrowRight size={15} />
-                </motion.button>
-              </div>
-            </motion.section>
+          
           </div>
         </section>
       </main>
