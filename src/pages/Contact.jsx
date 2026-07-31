@@ -30,22 +30,22 @@ import submitCta from "../assets/images/submitcta.png";
 const HERO_STATS = [
   {
     icon: BookOpen,
-    value: "25+",
+    value: "120+",
     label: "Journals",
   },
   {
     icon: FileText,
-    value: "15,000+",
+    value: "15,00+",
     label: "Articles Published",
   },
   {
     icon: Globe2,
-    value: "120+",
+    value: "5+",
     label: "Countries",
   },
   {
     icon: Award,
-    value: "98%",
+    value: "95%",
     label: "Author Satisfaction",
   },
 ];
@@ -55,9 +55,9 @@ const CONTACT_CARDS = [
     icon: MapPin,
     title: "Our Office",
     lines: [
-      "Pure Publications",
-      "Planet Apartment Omkar Nagar,",
-      "Nagpur, Maharashtra 440027",
+      "Planet Apartment" ,
+      " Omkar Nagar,",
+       "Nagpur,  440027"
     ],
   },
   {

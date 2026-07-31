@@ -615,27 +615,27 @@ export default function Journals() {
               {[
                 {
                   icon: BookOpen,
-                  number: "25+",
+                  number: "120+",
                   label: "Journals",
                 },
                 {
                   icon: FileText,
-                  number: "15,000+",
+                  number: "15,00+",
                   label: "Articles Published",
                 },
                 {
                   icon: Globe2,
-                  number: "120+",
+                  number: "5+",
                   label: "Countries",
                 },
                 {
                   icon: Users,
-                  number: "10,000+",
+                  number: "10,00+",
                   label: "Active Authors",
                 },
                 {
                   icon: Award,
-                  number: "98%",
+                  number: "95%",
                   label: "Author Satisfaction",
                 },
               ].map((item, index) => {

@@ -39,25 +39,25 @@ const BRAND = {
 const HERO_STATS = [
   {
     icon: BookOpen,
-    value: 25,
+    value: 120,
     suffix: "+",
     label: "Journals",
   },
   {
     icon: FileText,
-    value: 15000,
+    value: 1500,
     suffix: "+",
     label: "Articles Published",
   },
   {
     icon: Globe2,
-    value: 120,
+    value: 5,
     suffix: "+",
     label: "Countries",
   },
   {
     icon: Award,
-    value: 98,
+    value: 95,
     suffix: "%",
     label: "Author Satisfaction",
   },
@@ -549,16 +549,16 @@ const showJournalPage = (pageIndex) => {
               max-w-[1180px]
               px-4
               pb-[95px]
-              pt-12
+              pt-20
 
               sm:min-h-[480px]
               
-              sm:pt-16
+              sm:pt-24
 
               lg:min-h-[445px]
               lg:px-8 xl:px-0 sm:px-6
               lg:pb-[45px]
-              lg:pt-[52px]
+              lg:pt-[75px]
 
               
             "

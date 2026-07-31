@@ -32,25 +32,25 @@ import aboutCta from "../assets/images/aboutcta.png";
 const HERO_STATS = [
   {
     icon: BookOpen,
-    value: 25,
+    value: 120,
     suffix: "+",
     label: "Journals",
   },
   {
     icon: FileText,
-    value: 15000,
+    value: 1500,
     suffix: "+",
     label: "Articles Published",
   },
   {
     icon: Globe2,
-    value: 120,
+    value: 5,
     suffix: "+",
     label: "Countries",
   },
   {
     icon: Award,
-    value: 98,
+    value: 95,
     suffix: "%",
     label: "Author Satisfaction",
   },

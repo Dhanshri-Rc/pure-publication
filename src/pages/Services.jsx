@@ -33,13 +33,13 @@ import serviceCta from "../assets/images/servicecta.png";
 const HERO_STATS = [
   {
     icon: FileText,
-    value: 15000,
+    value: 1500,
     suffix: "+",
     label: "Articles Published",
   },
   {
     icon: Award,
-    value: 98,
+    value: 95,
     suffix: "%",
     label: "Author Satisfaction",
   },
@@ -120,31 +120,31 @@ const BENEFITS = [
 const STATISTICS = [
   {
     icon: BookOpen,
-    value: 25,
+    value: 120,
     suffix: "+",
     label: "Journals",
   },
   {
     icon: FileText,
-    value: 15000,
+    value: 1500,
     suffix: "+",
     label: "Published Articles",
   },
   {
     icon: Globe2,
-    value: 120,
+    value: 5,
     suffix: "+",
     label: "Countries",
   },
   {
     icon: Users2,
-    value: 10000,
+    value: 1000,
     suffix: "+",
     label: "Active Authors",
   },
   {
     icon: Award,
-    value: 98,
+    value: 95,
     suffix: "%",
     label: "Author Satisfaction",
   },
@@ -709,18 +709,18 @@ export default function Services() {
                 whileInView="visible"
                 viewport={{ once: true }}
               >
-                <h2 className="font-serif text-[22px] font-semibold leading-[1.08] text-white sm:text-[25px]">
+                <h2 className="font-serif text-[22px] font-semibold leading-[1.28] text-white/90 sm:text-[20px]">
                   Empowering Research,
                   <span className="block">Enriching Knowledge</span>
                 </h2>
 
-                <p className="mt-4 max-w-[390px] text-[12px] leading-6 text-white/80">
+                <p className="mt-2 max-w-[390px] text-[12px] leading-6 text-white/80">
                   We are committed to providing world-class academic services
                   that help researchers publish, collaborate, and grow.
                 </p>
 
                 <motion.div
-                  className="mt-6 inline-block"
+                  className="mt-4 inline-block"
                   whileHover={{ y: -3 }}
                   whileTap={{ scale: 0.97 }}
                 >
@@ -737,11 +737,11 @@ export default function Services() {
                       px-6
                       text-[12px]
                       font-semibold
-                      text-[#073a37]
+                      hover:text-[#073a37]
                       shadow-[0_10px_24px_rgba(0,0,0,0.18)]
                       transition-all
                       duration-300
-                      hover:bg-white
+                      text-white
                     "
                   >
                     Submit Your Paper
@@ -966,10 +966,10 @@ export default function Services() {
                       px-6
                       text-[12px]
                       font-semibold
-                      text-[#073a37]
+                      hover:text-[#073a37]
                       transition-all
                       duration-300
-                      hover:bg-white
+                      text-white
                     "
                   >
                     Submit Your Paper Now
