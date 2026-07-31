@@ -942,22 +942,22 @@ export default function SubmitPaper() {
                   {[
                     {
                       icon: BookOpen,
-                      value: "25+",
+                      value: "120+",
                       label: "Journals",
                     },
                     {
                       icon: FileText,
-                      value: "15,000+",
+                      value: "1500+",
                       label: "Articles Published",
                     },
                     {
                       icon: Globe2,
-                      value: "120+",
+                      value: "5+",
                       label: "Countries",
                     },
                     {
                       icon: Award,
-                      value: "98%",
+                      value: "95%",
                       label: "Author Satisfaction",
                     },
                   ].map((item, index) => {

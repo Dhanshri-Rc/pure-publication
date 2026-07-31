@@ -35,7 +35,7 @@ const HERO_STATS = [
   },
   {
     icon: FileText,
-    value: "15,00+",
+    value: "1500+",
     label: "Articles Published",
   },
   {

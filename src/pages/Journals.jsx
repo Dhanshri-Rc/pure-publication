@@ -620,7 +620,7 @@ export default function Journals() {
                 },
                 {
                   icon: FileText,
-                  number: "15,00+",
+                  number: "1500+",
                   label: "Articles Published",
                 },
                 {
@@ -630,7 +630,7 @@ export default function Journals() {
                 },
                 {
                   icon: Users,
-                  number: "10,00+",
+                  number: "1000+",
                   label: "Active Authors",
                 },
                 {
