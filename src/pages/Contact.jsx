@@ -56,29 +56,19 @@ const CONTACT_CARDS = [
     title: "Our Office",
     lines: [
       "Pure Publications",
-      "123 Research Avenue,",
-      "Knowledge City, Sector 62,",
-      "Noida, Uttar Pradesh 201301,",
-      "India",
+      "Planet Apartment Omkar Nagar,",
+      "Nagpur, Maharashtra 440027",
     ],
   },
   {
     icon: Phone,
     title: "Call Us",
-    lines: [
-      "+91  84467 23800",
-      "",
-      "(Mon - Fri, 10:00 AM - 6:00 PM IST)",
-    ],
+    lines: ["+91  84467 23800", "", "(Mon - Fri, 10:00 AM - 6:00 PM IST)"],
   },
   {
     icon: Mail,
     title: "Email Us",
-    lines: [
-      "publicationpure@gmail.com",
-      "",
-      "(We respond within 24 hours)",
-    ],
+    lines: ["publicationpure@gmail.com", "", "(We respond within 24 hours)"],
   },
   {
     icon: Clock3,
@@ -232,9 +222,7 @@ function FormField({
       )}
 
       {error && (
-        <p className="mt-1.5 text-[10px] font-medium text-red-500">
-          {error}
-        </p>
+        <p className="mt-1.5 text-[10px] font-medium text-red-500">{error}</p>
       )}
     </div>
   );
@@ -283,32 +271,32 @@ export default function Contact() {
   //   }
   // }
 
-async function onSubmit(data) {
-  console.log("Submitting...", data);
+  async function onSubmit(data) {
+    console.log("Submitting...", data);
 
-  setSubmitError("");
-  setSubmitted(false);
+    setSubmitError("");
+    setSubmitted(false);
 
-  try {
-    const documentId = await submitContactMessage(data);
+    try {
+      const documentId = await submitContactMessage(data);
 
-    console.log("Message saved successfully:", documentId);
+      console.log("Message saved successfully:", documentId);
 
-    setSubmitted(true);
-    reset();
+      setSubmitted(true);
+      reset();
 
-    window.setTimeout(() => {
-      setSubmitted(false);
-    }, 5000);
-  } catch (error) {
-    console.error("Contact submission error:", error);
+      window.setTimeout(() => {
+        setSubmitted(false);
+      }, 5000);
+    } catch (error) {
+      console.error("Contact submission error:", error);
 
-    setSubmitError(
-      error?.message ||
-        "Something went wrong while sending your message. Please try again."
-    );
+      setSubmitError(
+        error?.message ||
+          "Something went wrong while sending your message. Please try again.",
+      );
+    }
   }
-}
 
   return (
     <>
@@ -364,7 +352,7 @@ async function onSubmit(data) {
               className="relative z-10 w-full max-w-[660px]"
             >
               <motion.div variants={fadeUp}>
-                <div className="mb-5  mt-16 flex items-center gap-3 text-[12px] font-medium text-[#536563]">
+                <div className="mb-5 mt-16 flex items-center gap-3 text-[12px] font-medium text-[#536563]">
                   <Link
                     to="/"
                     className="transition-colors duration-300 hover:text-[#c9953e]"
@@ -402,7 +390,7 @@ async function onSubmit(data) {
               <motion.p
                 variants={fadeUp}
                 className="
-                  mt-6
+                  mt-5
                   max-w-[550px]
                   text-[14px]
                   leading-7
@@ -560,7 +548,7 @@ async function onSubmit(data) {
                               key={`${card.title}-${index}`}
                               className="h-1"
                             />
-                          )
+                          ),
                         )}
                       </div>
                     </div>
@@ -637,10 +625,7 @@ async function onSubmit(data) {
                       text-center
                     "
                   >
-                    <CheckCircle2
-                      size={50}
-                      className="text-green-500"
-                    />
+                    <CheckCircle2 size={50} className="text-green-500" />
 
                     <h3 className="mt-4 font-serif text-[23px] font-semibold text-[#173f3c]">
                       Message Sent!
@@ -734,7 +719,8 @@ async function onSubmit(data) {
                         required: "Message is required.",
                         minLength: {
                           value: 10,
-                          message: "Message must contain at least 10 characters.",
+                          message:
+                            "Message must contain at least 10 characters.",
                         },
                       })}
                     />
@@ -827,8 +813,8 @@ async function onSubmit(data) {
 
               <div className="relative min-h-[435px] overflow-hidden rounded-[8px] border border-[#e0e7e5]">
                 <iframe
-                  title="Pure Publications location"
-                  src="https://www.google.com/maps?q=Sector%2062%20Noida%20Uttar%20Pradesh%20India&output=embed"
+                  title="Pure Publications Location"
+                  src="https://www.google.com/maps?q=Pure+Publications,+Nagpur,+Maharashtra&output=embed"
                   loading="lazy"
                   referrerPolicy="no-referrer-when-downgrade"
                   className="absolute inset-0 h-full w-full border-0"
@@ -858,11 +844,9 @@ async function onSubmit(data) {
                   <p className="text-[11px] font-[550]">Pure Publications</p>
 
                   <p className="mt-1 text-[9px] leading-4 text-white/85">
-                    Knowledge City, Sector 62,
+                    Planet Apartment Omkar Nagar,
                     <br />
-                    Noida, Uttar Pradesh 201301,
-                    <br />
-                    India
+                    Nagpur, Maharashtra 440027
                   </p>
 
                   <span
@@ -924,36 +908,6 @@ async function onSubmit(data) {
                 </h2>
 
                 <span className="mt-2 block h-[2px] w-10 bg-[#d0a151]" />
-              </motion.div>
-
-              <motion.div
-                variants={fadeRight}
-                initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true }}
-              >
-                <Link
-                  to="/faqs"
-                  className="
-                    group
-                    inline-flex
-                    items-center
-                    gap-2
-                    text-[11px]
-                    font-semibold
-                    text-[#173f3c]
-                    transition-colors
-                    duration-300
-                    hover:text-[#c9953e]
-                  "
-                >
-                  View All FAQs
-
-                  <ArrowRight
-                    size={14}
-                    className="transition-transform duration-300 group-hover:translate-x-1"
-                  />
-                </Link>
               </motion.div>
             </div>
 
@@ -1154,7 +1108,6 @@ async function onSubmit(data) {
                 "
               >
                 Submit Your Paper
-
                 <ArrowRight
                   size={18}
                   className="transition-transform duration-300 group-hover:translate-x-1"

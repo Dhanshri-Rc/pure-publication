@@ -142,9 +142,7 @@ export default function Navbar() {
               src={logo}
               alt="Pure Publication Logo"
               className={`object-contain transition-all duration-300 ${
-                scrolled
-                  ? "h-10 w-auto sm:h-11"
-                  : "h-11 w-auto sm:h-11"
+                scrolled ? "h-10 w-auto sm:h-11" : "h-11 w-auto sm:h-11"
               }`}
               whileHover={{
                 scale: 1.04,
@@ -178,9 +176,7 @@ export default function Navbar() {
 
                       <span
                         className={`absolute bottom-1.5 left-1/2 h-[2px] -translate-x-1/2 rounded-full bg-[#D4A257] transition-all duration-300 ${
-                          isActive
-                            ? "w-[40%]"
-                            : "w-0 group-hover:w-[40%]"
+                          isActive ? "w-[40%]" : "w-0 group-hover:w-[40%]"
                         }`}
                       />
                     </>
@@ -192,15 +188,12 @@ export default function Navbar() {
 
           {/* DESKTOP ACTIONS */}
           <div className="hidden items-center gap-3 lg:flex">
-           
-
-            <button
+            <Link
               to="/submit-paper"
-              variant="primary"
-              className="min-h-9 text-[14px] whitespace-nowrap rounded-lg bg-[#D4A257] px-5 font-medium text-[#ffffff] shadow-none transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#E1B66F] hover:shadow-[0_10px_25px_rgba(212,162,87,0.25)]"
+              className="flex min-h-9 items-center justify-center whitespace-nowrap rounded-lg bg-[#D4A257] px-5 text-[14px] font-medium text-white transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#E1B66F] hover:shadow-[0_10px_25px_rgba(212,162,87,0.25)]"
             >
               Submit Paper
-            </button>
+            </Link>
           </div>
 
           {/* MOBILE MENU BUTTON */}
@@ -254,9 +247,7 @@ export default function Navbar() {
                     autoFocus
                     type="search"
                     value={searchValue}
-                    onChange={(event) =>
-                      setSearchValue(event.target.value)
-                    }
+                    onChange={(event) => setSearchValue(event.target.value)}
                     placeholder="Search journals, articles, topics..."
                     className="h-12 w-full rounded-xl border border-white/15 bg-white/10 pl-12 pr-28 text-sm text-white outline-none transition-all duration-300 placeholder:text-white/45 focus:border-[#D4A257] focus:bg-white/12 focus:shadow-[0_0_0_4px_rgba(212,162,87,0.1)]"
                   />
@@ -335,10 +326,7 @@ export default function Navbar() {
               </div>
 
               {/* MOBILE SEARCH */}
-              <form
-                onSubmit={handleSearchSubmit}
-                className="relative mt-6"
-              >
+              <form onSubmit={handleSearchSubmit} className="relative mt-6">
                 <Search
                   size={18}
                   className="pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 text-white/45"
@@ -347,9 +335,7 @@ export default function Navbar() {
                 <input
                   type="search"
                   value={searchValue}
-                  onChange={(event) =>
-                    setSearchValue(event.target.value)
-                  }
+                  onChange={(event) => setSearchValue(event.target.value)}
                   placeholder="Search journals..."
                   className="h-12 w-full rounded-xl border border-white/15 bg-white/8 pl-12 pr-4 text-sm text-white outline-none transition-all placeholder:text-white/40 focus:border-[#D4A257] focus:bg-white/10"
                 />
@@ -409,8 +395,7 @@ export default function Navbar() {
                 </Button>
 
                 <p className="mt-4 text-center text-[11px] leading-5 text-white/45">
-                  Trusted academic publishing and professional research
-                  support.
+                  Trusted academic publishing and professional research support.
                 </p>
               </div>
             </motion.aside>
