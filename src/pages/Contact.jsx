@@ -66,18 +66,16 @@ const CONTACT_CARDS = [
     icon: Phone,
     title: "Call Us",
     lines: [
-      "+91 98765 43210",
-      "+91 120 456 7890",
+      "+91  84467 23800",
       "",
-      "(Mon - Fri, 9:00 AM - 6:00 PM IST)",
+      "(Mon - Fri, 10:00 AM - 6:00 PM IST)",
     ],
   },
   {
     icon: Mail,
     title: "Email Us",
     lines: [
-      "info@purepublications.org",
-      "support@purepublications.org",
+      "publicationpure@gmail.com",
       "",
       "(We respond within 24 hours)",
     ],
@@ -87,7 +85,7 @@ const CONTACT_CARDS = [
     title: "Working Hours",
     lines: [
       "Monday - Friday",
-      "9:00 AM - 6:00 PM (IST)",
+      "10:00 AM - 6:00 PM (IST)",
       "",
       "Saturday - Sunday",
       "Closed",
@@ -549,11 +547,11 @@ async function onSubmit(data) {
                     </div>
 
                     <div>
-                      <h2 className="text-[14px] font-[550] text-[#173f3c]">
+                      <h2 className="text-[15px] font-[550] text-[#173f3c]">
                         {card.title}
                       </h2>
 
-                      <div className="mt-3 space-y-1 text-[11px] leading-5 text-[#61716f]">
+                      <div className="mt-3 space-y-1 text-[13px] leading-5 text-[#61716f]">
                         {card.lines.map((line, index) =>
                           line ? (
                             <p key={`${card.title}-${index}`}>{line}</p>
