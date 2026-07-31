@@ -366,7 +366,7 @@ async function onSubmit(data) {
               className="relative z-10 w-full max-w-[660px]"
             >
               <motion.div variants={fadeUp}>
-                <div className="mb-7  mt-16 flex items-center gap-3 text-[12px] font-medium text-[#536563]">
+                <div className="mb-5  mt-16 flex items-center gap-3 text-[12px] font-medium text-[#536563]">
                   <Link
                     to="/"
                     className="transition-colors duration-300 hover:text-[#c9953e]"
@@ -386,13 +386,13 @@ async function onSubmit(data) {
                 variants={fadeLeft}
                 className="
                   font-serif
-                  font-semibold
+                  font-[600]
                   leading-[1.04]
                   tracking-[-0.025em]
                   text-[#063330]
-                  text-[30px]
-             sm:text-[38px]
-             lg:text-[44px]
+                  text-[28px]
+             sm:text-[32px]
+             lg:text-[36px]
                 "
               >
                 Get in Touch
@@ -421,7 +421,7 @@ async function onSubmit(data) {
               <motion.div
                 variants={fadeUp}
                 className="
-                  mt-9
+                  mt-5
                   grid
                   max-w-[780px]
                   grid-cols-2
