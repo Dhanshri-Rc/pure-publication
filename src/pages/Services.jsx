@@ -428,12 +428,12 @@ export default function Services() {
                 variants={fadeLeft}
                 className="
                   font-serif
-                  font-semibold
+                  font-[600]
                   leading-[1.04]
                   text-[#063330]
-                  text-[30px]
-             sm:text-[38px]
-             lg:text-[44px]
+                  text-[28px]
+             sm:text-[32px]
+             lg:text-[36px]
                 "
               >
                 Our{" "}
