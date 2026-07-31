@@ -46,8 +46,8 @@ export const SOCIAL_LINKS = [
 ];
 
 export const CONTACT_INFO = {
-  address: "221 Research Park, Sector 18, Gurugram, Haryana, India",
-  email: "info@purepublication.com",
-  phone: "+91 98765 43210",
+  address: "Planet Apartment Omkar Nagar, Nagpur, Maharashtra 440027",
+  email: "publicationpure@gmail.com",
+  phone: "+91 84467 23800",
   hours: "Mon - Sat: 9:00 AM - 6:00 PM",
 };
