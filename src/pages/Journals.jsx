@@ -522,12 +522,12 @@ export default function Journals() {
               initial={{ opacity: 0, x: -35 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.7 }}
-              className="relative z-10 flex items-center px-5 py-14 sm:px-8 lg:px-14 xl:px-20"
+              className="relative z-10 flex items-center px-5 py-14 sm:pxFilter Journals-8 lg:px-14 xl:px-20"
             >
               <div className="max-w-[640px]">
                 <div className="mb-4 flex items-center gap-3">
                   <span className="h-px w-8 bg-[#c4934d]" />
-                  <span className="text-[11px] font-bold uppercase tracking-[0.18em] text-[#bd8a43]">
+                  <span className="text-[11px] font-[600] uppercase tracking-[0.18em] text-[#bd8a43]">
                     Our Journals
                   </span>
                 </div>
@@ -581,8 +581,6 @@ export default function Journals() {
                 }}
               />
 
-            
-
               <div
                 className="absolute inset-y-0 -left-1 w-[125px] bg-white"
                 style={{
@@ -597,9 +595,7 @@ export default function Journals() {
               style={{
                 backgroundImage: `url(${journalsHero})`,
               }}
-            >
-            
-            </div>
+            ></div>
           </div>
         </section>
 
@@ -690,7 +686,7 @@ export default function Journals() {
                 Filter Journals
               </button>
 
-              <p className="text-[12px] text-[#6f7d7c]">
+              <p className="text-[14px] text-[#6f7d7c]">
                 Showing{" "}
                 <span className="font-semibold text-[#173f3d]">
                   {showingStart}–{showingEnd}
@@ -706,7 +702,7 @@ export default function Journals() {
                 <div className="flex items-center gap-2">
                   <label
                     htmlFor="journal-sort"
-                    className="text-[12px] text-[#657776]"
+                    className="text-[14px] text-[#657776]"
                   >
                     Sort by:
                   </label>
@@ -719,7 +715,7 @@ export default function Journals() {
                         setSortBy(event.target.value);
                         setCurrentPage(1);
                       }}
-                      className="appearance-none rounded-md border border-[#d4dfdd] bg-white py-2.5 pl-3 pr-9 text-[12px] font-medium text-[#294b49] outline-none transition focus:border-[#0a514e]"
+                      className="appearance-none rounded-md border border-[#d4dfdd] bg-white py-2.5 pl-3 pr-9 text-[13px] font-medium text-[#294b49] outline-none transition focus:border-[#0a514e]"
                     >
                       <option value="latest">Latest</option>
                       <option value="title-asc">Title A–Z</option>
@@ -774,7 +770,7 @@ export default function Journals() {
                   <div className="mb-5 flex items-center justify-between">
                     <div className="flex items-center gap-2">
                       <Filter size={15} className="text-[#0b4a47]" />
-                      <h2 className="text-[13px] font-bold text-[#163f3d]">
+                      <h2 className="text-[14px] font-[550] text-[#163f3d]">
                         Filter Journals
                       </h2>
                     </div>
@@ -782,7 +778,7 @@ export default function Journals() {
                     <button
                       type="button"
                       onClick={resetFilters}
-                      className="text-[10px] font-semibold text-[#667b79] transition hover:text-[#b7833e]"
+                      className="text-[11px] font-semibold text-[#667b79] transition hover:text-[#b7833e]"
                     >
                       Clear All
                     </button>
@@ -791,7 +787,7 @@ export default function Journals() {
                   {/* Subject Area */}
 
                   <div className="border-b border-[#e5ecea] pb-5">
-                    <h3 className="mb-3 flex items-center justify-between text-[11px] font-bold text-[#1d4543]">
+                    <h3 className="mb-3 flex items-center justify-between text-[14px] font-[550] text-[#1d4543]">
                       Subject Area
                       <ChevronDown size={13} />
                     </h3>
@@ -803,7 +799,7 @@ export default function Journals() {
                         return (
                           <label
                             key={item}
-                            className="flex cursor-pointer items-start gap-2 text-[10px] leading-4 text-[#596d6b]"
+                            className="flex cursor-pointer items-start gap-2 text-[12px] leading-4 text-[#596d6b]"
                           >
                             <input
                               type="checkbox"
@@ -847,7 +843,7 @@ export default function Journals() {
                   {/* Indexing */}
 
                   <div className="border-b border-[#e5ecea] py-5">
-                    <h3 className="mb-3 flex items-center justify-between text-[11px] font-bold text-[#1d4543]">
+                    <h3 className="mb-3 flex items-center justify-between text-[14px] font-[550] text-[#1d4543]">
                       Indexing
                       <ChevronDown size={13} />
                     </h3>
@@ -859,7 +855,7 @@ export default function Journals() {
                         return (
                           <label
                             key={item}
-                            className="flex cursor-pointer items-center gap-2 text-[10px] text-[#596d6b]"
+                            className="flex cursor-pointer items-center gap-2 text-[12px] text-[#596d6b]"
                           >
                             <input
                               type="checkbox"
@@ -903,7 +899,7 @@ export default function Journals() {
                   {/* Publication Frequency */}
 
                   <div className="border-b border-[#e5ecea] py-5">
-                    <h3 className="mb-3 flex items-center justify-between text-[11px] font-bold text-[#1d4543]">
+                    <h3 className="mb-3 flex items-center justify-between text-[14px] font-[550] text-[#1d4543]">
                       Publication Frequency
                       <ChevronDown size={13} />
                     </h3>
@@ -915,7 +911,7 @@ export default function Journals() {
                         return (
                           <label
                             key={item}
-                            className="flex cursor-pointer items-center gap-2 text-[10px] text-[#596d6b]"
+                            className="flex cursor-pointer items-center gap-2 text-[12px] text-[#596d6b]"
                           >
                             <input
                               type="checkbox"
@@ -959,7 +955,7 @@ export default function Journals() {
                   {/* Access Type */}
 
                   <div className="py-5">
-                    <h3 className="mb-3 flex items-center justify-between text-[11px] font-bold text-[#1d4543]">
+                    <h3 className="mb-3 flex items-center justify-between text-[14px] font-[550] text-[#1d4543]">
                       Access Type
                       <ChevronDown size={13} />
                     </h3>
@@ -971,7 +967,7 @@ export default function Journals() {
                         return (
                           <label
                             key={item}
-                            className="flex cursor-pointer items-center gap-2 text-[10px] text-[#596d6b]"
+                            className="flex cursor-pointer items-center gap-2 text-[12px] text-[#596d6b]"
                           >
                             <input
                               type="checkbox"
@@ -1014,7 +1010,7 @@ export default function Journals() {
 
                   <button
                     type="button"
-                    className="flex w-full items-center justify-center gap-2 rounded-md bg-[#073f3d] px-4 py-3 text-[11px] font-semibold text-white shadow-[0_7px_15px_rgba(7,63,61,0.18)] transition duration-300 hover:-translate-y-0.5 hover:bg-[#bd8a43]"
+                    className="flex w-full items-center justify-center gap-2 rounded-md bg-[#073f3d] px-4 py-3 text-[12px] font-semibold text-white shadow-[0_7px_15px_rgba(7,63,61,0.18)] transition duration-300 hover:-translate-y-0.5 hover:bg-[#bd8a43]"
                   >
                     Apply Filters
                     <Filter size={13} />
@@ -1023,7 +1019,7 @@ export default function Journals() {
                   <button
                     type="button"
                     onClick={resetFilters}
-                    className="mt-2.5 flex w-full items-center justify-center gap-2 rounded-md border border-[#9bb0ad] bg-white px-4 py-2.5 text-[10px] font-semibold text-[#244c49] transition hover:border-[#bd8a43] hover:text-[#bd8a43]"
+                    className="mt-2.5 flex w-full items-center justify-center gap-2 rounded-md border border-[#9bb0ad] bg-white px-4 py-2.5 text-[12px] font-semibold text-[#244c49] transition hover:border-[#bd8a43] hover:text-[#bd8a43]"
                   >
                     Reset Filters
                     <RotateCcw size={12} />
@@ -1042,7 +1038,7 @@ export default function Journals() {
                       size={38}
                       className="animate-spin text-[#0a4b48]"
                     />
-                    <p className="mt-4 text-sm font-medium text-[#637775]">
+                    <p className="mt-4 text-[12px] font-medium text-[#637775]">
                       Loading journals...
                     </p>
                   </div>
@@ -1131,11 +1127,6 @@ export default function Journals() {
                                   : "flex min-h-[220px] items-center justify-center p-5"
                               }`}
                             >
-                              <div className="absolute inset-0 opacity-50">
-                                <div className="absolute -left-10 top-7 h-28 w-28 rounded-full border border-[#cbdad7]" />
-                                <div className="absolute right-7 top-12 h-20 w-20 rounded-full border border-[#d8e3e1]" />
-                              </div>
-
                               <motion.div
                                 whileHover={{
                                   rotate: -1.5,
@@ -1152,26 +1143,26 @@ export default function Journals() {
                                 <div className="absolute inset-0 bg-gradient-to-tr from-black/20 via-transparent to-white/15" />
 
                                 <div className="relative flex h-full flex-col p-3 text-white">
-                                  <p className="text-[5px] uppercase tracking-[0.15em] text-white/75">
+                                  <p className="text-[6px] uppercase tracking-[0.15em] text-white/75">
                                     International Journal
                                   </p>
 
                                   <div className="my-2 h-px bg-white/35" />
 
-                                  <p className="whitespace-pre-line font-serif text-[10px] font-semibold leading-[1.25]">
+                                  <p className="whitespace-pre-line font-serif text-[11px] font-[520] leading-[1.25]">
                                     {coverTitle}
                                   </p>
 
                                   <div className="mt-auto">
                                     <div className="mb-1.5 h-px bg-white/30" />
-                                    <p className="text-[4.5px] uppercase tracking-wider text-white/75">
+                                    <p className="text-[6px] uppercase tracking-wider text-white/75">
                                       Pure Publications
                                     </p>
                                   </div>
                                 </div>
                               </motion.div>
 
-                              <span className="absolute left-[118px] top-4 z-10 rounded-full border border-[#a9cc9e] bg-[#eff9ea] px-2 py-1 text-[7px] font-bold text-[#44743c]">
+                              <span className="absolute left-[118px] top-4 z-10 rounded-full border border-[#a9cc9e] bg-[#eff9ea] px-2 py-1 text-[8px] font-[520] text-[#44743c]">
                                 {access}
                               </span>
                             </div>
@@ -1180,17 +1171,17 @@ export default function Journals() {
 
                             <div className="flex min-w-0 flex-col p-4">
                               <div className="min-h-[72px]">
-                                <h2 className="pr-8 font-serif text-[14px] font-bold leading-[1.35] text-[#163e3c] transition group-hover:text-[#b5813e]">
+                                <h2 className="pr-8 font-serif text-[14px] font-[550] leading-[1.35] text-[#163e3c] transition group-hover:text-[#b5813e]">
                                   {journal.title}
                                 </h2>
 
-                                <p className="mt-2 text-[9px] font-medium text-[#758582]">
+                                <p className="mt-2 text-[11px] font-medium text-[#758582]">
                                   ISSN: {journal.issn || "2456-1010"}
                                 </p>
                               </div>
 
                               <p
-                                className={`mt-3 text-[10px] leading-[1.65] text-[#647674] ${
+                                className={`mt-3 text-[12px] leading-[1.65] text-[#647674] ${
                                   viewMode === "grid" ? "line-clamp-3" : ""
                                 }`}
                               >
@@ -1202,14 +1193,14 @@ export default function Journals() {
                                 {journalIndexing.slice(0, 3).map((item) => (
                                   <span
                                     key={item}
-                                    className="rounded-full bg-[#eef3f2] px-2 py-1 text-[7px] font-semibold text-[#5e716f]"
+                                    className="rounded-full bg-[#eef3f2] px-2 py-1 text-[10px] font-semibold text-[#5e716f]"
                                   >
                                     {item}
                                   </span>
                                 ))}
                               </div>
 
-                              <div className="mt-4 flex items-center justify-between border-t border-[#edf1f0] pt-3 text-[8px] font-semibold text-[#667a78]">
+                              <div className="mt-4 flex items-center justify-between border-t border-[#edf1f0] pt-3 text-[12px] font-semibold text-[#667a78]">
                                 <span>{frequency}</span>
                                 <span>IF {impactFactor}</span>
                               </div>
@@ -1218,7 +1209,7 @@ export default function Journals() {
                                 to={`/journal-detail/${
                                   journal.slug || journalId
                                 }`}
-                                className="mt-3 flex items-center justify-center gap-2 rounded-md bg-[#073f3d] px-4 py-2.5 text-[9px] font-semibold text-white shadow-[0_6px_13px_rgba(7,63,61,0.16)] transition duration-300 hover:bg-[#bd8a43]"
+                                className="mt-4 flex items-center justify-center gap-2 rounded-md bg-[#073f3d] px-4 py-2.5 text-[12px] font-semibold text-white shadow-[0_6px_13px_rgba(7,63,61,0.16)] transition duration-300 hover:bg-[#bd8a43]"
                               >
                                 View Journal
                                 <ArrowRight
@@ -1242,11 +1233,11 @@ export default function Journals() {
                       <BookOpen size={28} />
                     </div>
 
-                    <h2 className="mt-5 font-serif text-2xl font-bold text-[#153f3d]">
+                    <h2 className="mt-5 font-serif text-[18px] font-[550] text-[#153f3d]">
                       No journals found
                     </h2>
 
-                    <p className="mt-2 max-w-md text-sm leading-6 text-[#6d7e7c]">
+                    <p className="mt-2 max-w-md text-[12px] leading-6 text-[#6d7e7c]">
                       We could not find journals matching your selected search
                       and filter options.
                     </p>
@@ -1254,7 +1245,7 @@ export default function Journals() {
                     <button
                       type="button"
                       onClick={resetFilters}
-                      className="mt-5 inline-flex items-center gap-2 rounded-md bg-[#073f3d] px-5 py-3 text-xs font-semibold text-white transition hover:bg-[#bd8a43]"
+                      className="mt-5 inline-flex items-center gap-2 rounded-md bg-[#073f3d] px-5 py-3 text-[12px] font-semibold text-white transition hover:bg-[#bd8a43]"
                     >
                       <RotateCcw size={14} />
                       Reset Filters
@@ -1422,10 +1413,10 @@ export default function Journals() {
               >
                 <div className="mb-6 flex items-center justify-between border-b border-[#e1e9e7] pb-4">
                   <div>
-                    <p className="text-[10px] font-bold uppercase tracking-[0.14em] text-[#b8833f]">
+                    <p className="text-[10px] font-[550] uppercase tracking-[0.14em] text-[#b8833f]">
                       Browse
                     </p>
-                    <h2 className="mt-1 font-serif text-2xl font-bold text-[#163f3d]">
+                    <h2 className="mt-1 font-serif text-2xl font-[550] text-[#163f3d]">
                       Filter Journals
                     </h2>
                   </div>
@@ -1441,7 +1432,7 @@ export default function Journals() {
 
                 <div className="space-y-7">
                   <div>
-                    <h3 className="mb-3 text-xs font-bold text-[#1d4543]">
+                    <h3 className="mb-3 text-[12px] font-[550] text-[#1d4543]">
                       Subject Area
                     </h3>
 
@@ -1452,7 +1443,7 @@ export default function Journals() {
                         return (
                           <label
                             key={item}
-                            className="flex cursor-pointer items-center gap-3 text-xs text-[#596d6b]"
+                            className="flex cursor-pointer items-center gap-3 text-[12px] text-[#596d6b]"
                           >
                             <input
                               type="checkbox"
@@ -1486,7 +1477,7 @@ export default function Journals() {
                   </div>
 
                   <div>
-                    <h3 className="mb-3 text-xs font-bold text-[#1d4543]">
+                    <h3 className="mb-3 text-[12px] font-[550] text-[#1d4543]">
                       Indexing
                     </h3>
 
@@ -1497,7 +1488,7 @@ export default function Journals() {
                         return (
                           <label
                             key={item}
-                            className="flex cursor-pointer items-center gap-3 text-xs text-[#596d6b]"
+                            className="flex cursor-pointer items-center gap-3 text-[12px] text-[#596d6b]"
                           >
                             <input
                               type="checkbox"
@@ -1531,7 +1522,7 @@ export default function Journals() {
                   </div>
 
                   <div>
-                    <h3 className="mb-3 text-xs font-bold text-[#1d4543]">
+                    <h3 className="mb-3 text-[12px] font-[550] text-[#1d4543]">
                       Publication Frequency
                     </h3>
 
@@ -1542,7 +1533,7 @@ export default function Journals() {
                         return (
                           <label
                             key={item}
-                            className="flex cursor-pointer items-center gap-3 text-xs text-[#596d6b]"
+                            className="flex cursor-pointer items-center gap-3 text-[12px] text-[#596d6b]"
                           >
                             <input
                               type="checkbox"
@@ -1576,7 +1567,7 @@ export default function Journals() {
                   </div>
 
                   <div>
-                    <h3 className="mb-3 text-xs font-bold text-[#1d4543]">
+                    <h3 className="mb-3 text-[12px] font-[550] text-[#1d4543]">
                       Access Type
                     </h3>
 
@@ -1587,7 +1578,7 @@ export default function Journals() {
                         return (
                           <label
                             key={item}
-                            className="flex cursor-pointer items-center gap-3 text-xs text-[#596d6b]"
+                            className="flex cursor-pointer items-center gap-3 text-[12px] text-[#596d6b]"
                           >
                             <input
                               type="checkbox"
