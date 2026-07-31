@@ -102,13 +102,15 @@ const footerLinks = [
     name: "Contact Us",
     path: "/contact",
   },
-  {
+   {
     name: "Privacy Policy",
     path: "/privacy-policy",
+    externalTab: true,
   },
   {
     name: "Terms of Service",
     path: "/terms-and-conditions",
+    externalTab: true,
   },
 ];
 
@@ -181,19 +183,21 @@ export default function Footer() {
 
   <nav aria-label="Footer navigation">
     <ul className="space-y-[2px]">
-      {footerLinks.map((link) => (
-        <li key={link.path}>
-          <Link
-            to={link.path}
-            className="group relative inline-block text-[13px]  text-white/70 transition-colors duration-300 hover:text-[#d9b66f]"
-          >
-            {link.name}
+  {footerLinks.map((link) => (
+    <li key={link.path}>
+      <Link
+        to={link.path}
+        target={link.externalTab ? "_blank" : undefined}
+        rel={link.externalTab ? "noopener noreferrer" : undefined}
+        className="group relative inline-block text-[13px]  text-white/70 transition-colors duration-300 hover:text-[#d9b66f]"
+      >
+        {link.name}
 
-            <span className="absolute -bottom-0.5 left-0 h-px w-0 bg-[#d9b66f] transition-all duration-300 group-hover:w-full" />
-          </Link>
-        </li>
-      ))}
-    </ul>
+        <span className="absolute -bottom-0.5 left-0 h-px w-0 bg-[#d9b66f] transition-all duration-300 group-hover:w-full" />
+      </Link>
+    </li>
+  ))}
+</ul>
   </nav>
 </div>
               {/* Contact section */}
