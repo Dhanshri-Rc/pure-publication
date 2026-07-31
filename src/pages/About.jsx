@@ -376,7 +376,7 @@ export default function About() {
               className="relative z-10 w-full max-w-[690px]"
             >
               <motion.div variants={fadeUp}>
-                <div className="mb-9 mt-16 flex items-center gap-3 text-[13px] font-medium text-[#536563]">
+                <div className="mb-5 mt-16 flex items-center gap-3 text-[13px] font-medium text-[#536563]">
                   <Link
                     to="/"
                     className="transition-colors duration-300 hover:text-[#c9953e]"
@@ -406,7 +406,7 @@ export default function About() {
 
               <motion.p
                 variants={fadeUp}
-                className="mt-7 max-w-[510px] text-[16px] leading-8 text-[#4a5c5b] sm:text-[18px]"
+                className="mt-5 max-w-[400px] text-[15px] leading-8 text-[#4a5c5b] sm:text-[16px]"
               >
                 Your trusted partner in academic excellence and professional
                 writing.
@@ -415,7 +415,7 @@ export default function About() {
               {/* Hero statistics */}
               <motion.div
                 variants={fadeUp}
-                className="mt-11 grid max-w-[760px] grid-cols-2 overflow-hidden rounded-[12px] border border-white/20 bg-[#003f3b]/95 shadow-[0_18px_40px_rgba(0,49,45,0.26)] backdrop-blur-sm lg:grid-cols-4"
+                className="mt-5 grid max-w-[760px] grid-cols-2 overflow-hidden rounded-[12px] border border-white/20 bg-[#003f3b]/95 shadow-[0_18px_40px_rgba(0,49,45,0.26)] backdrop-blur-sm lg:grid-cols-4"
               >
                 {HERO_STATS.map((stat, index) => {
                   const Icon = stat.icon;

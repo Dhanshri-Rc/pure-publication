@@ -371,14 +371,14 @@ export default function Services() {
         <section
           className="
             relative
-            min-h-[390px]
             overflow-hidden
             bg-white
             bg-cover
             bg-[68%_center]
             bg-no-repeat
-            sm:min-h-[420px]
-            lg:min-h-[470px]
+             min-h-[260px]
+             sm:min-h-[290px]
+             lg:min-h-[320px]
             lg:bg-center
           "
           style={{
@@ -408,7 +408,7 @@ export default function Services() {
               className="relative z-10 w-full max-w-[650px]"
             >
               <motion.div variants={fadeUp}>
-                <div className="mb-7 mt-2 flex items-center gap-3 text-[13px] font-medium text-[#536563]">
+                <div className="mb-7 mt-12 flex items-center gap-3 text-[13px] font-medium text-[#536563]">
                   <Link
                     to="/"
                     className="transition-colors duration-300 hover:text-[#c9953e]"
