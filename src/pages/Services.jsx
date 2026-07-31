@@ -408,7 +408,7 @@ export default function Services() {
               className="relative z-10 w-full max-w-[650px]"
             >
               <motion.div variants={fadeUp}>
-                <div className="mb-7 mt-12 flex items-center gap-3 text-[13px] font-medium text-[#536563]">
+                <div className="mb-7 mt-6 flex items-center gap-3 text-[12px] font-medium text-[#536563]">
                   <Link
                     to="/"
                     className="transition-colors duration-300 hover:text-[#c9953e]"
