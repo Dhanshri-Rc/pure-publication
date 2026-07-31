@@ -532,7 +532,7 @@ export default function Journals() {
                   </span>
                 </div>
 
-                <h1 className="font-serif font-semibold leading-[1.03] tracking-[-0.035em] text-[#073b3a]  text-[30px] sm:text-[38px] lg:text-[44px]">
+                <h1 className="font-serif font-[600] leading-[1.03] tracking-[-0.035em] text-[#073b3a]  text-[26px] sm:text-[32px] lg:text-[36px]">
                   Explore Our
                   <span className="mt-1 block text-[#bd8a43]">
                     Academic Journals

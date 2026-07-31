@@ -393,9 +393,9 @@ export default function About() {
               <motion.h1
                 variants={fadeLeft}
                 className="font-serif font-semibold leading-[1.05]
-             text-[30px]
-             sm:text-[38px]
-             lg:text-[44px]
+             text-[28px]
+             sm:text-[32px]
+             lg:text-[36px]
              text-[#063330]"
               >
                 About
