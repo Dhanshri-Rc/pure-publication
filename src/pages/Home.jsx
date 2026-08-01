@@ -39,7 +39,7 @@ const BRAND = {
 const HERO_STATS = [
   {
     icon: BookOpen,
-    value: 120,
+    value: 100,
     suffix: "+",
     label: "Journals",
   },

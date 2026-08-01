@@ -30,7 +30,7 @@ import submitCta from "../assets/images/submitcta.png";
 const HERO_STATS = [
   {
     icon: BookOpen,
-    value: "120+",
+    value: "100+",
     label: "Journals",
   },
   {

@@ -130,7 +130,7 @@ const BENEFITS = [
   {
     icon: Globe2,
     title: "Global Reach",
-    description: "Serving researchers from 120+ countries worldwide.",
+    description: "Serving researchers from 5+ countries worldwide.",
   },
   {
     icon: LockKeyhole,

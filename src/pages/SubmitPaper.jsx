@@ -942,7 +942,7 @@ export default function SubmitPaper() {
                   {[
                     {
                       icon: BookOpen,
-                      value: "120+",
+                      value: "100+",
                       label: "Journals",
                     },
                     {
